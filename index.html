@@ -414,6 +414,9 @@ footer{border-top:1px solid var(--line);padding:var(--s5) 0 var(--s3)}
 @media(max-width:760px){
   footer a, .ftr a, .foot a{display:inline-flex;align-items:center;min-height:44px}
 }
+
+/* длинная надпись на 320 px ломалась на строки, прижатые влево */
+.btn, .btn-main, a.btn, button.btn{text-align:center;line-height:1.25}
 </style>
 <noscript><style>.rise{opacity:1}</style></noscript>
 </head>
@@ -421,9 +424,9 @@ footer{border-top:1px solid var(--line);padding:var(--s5) 0 var(--s3)}
 <a href="#main" class="skip">Перейти к содержанию</a>
 
 <!-- ═══════ шапка ═══════ -->
-<header class="top">
+<header class="top" id="top">
   <div class="wrap top-in">
-    <a href="#" class="logo" aria-label="МОМЕНТ — на главную">
+    <a href="#top" class="logo" aria-label="МОМЕНТ — на главную">
       <svg class="logo-m" viewBox="0 0 40 40" fill="none" aria-hidden="true">
         <rect x="1.5" y="1.5" width="37" height="37" stroke="#FFC400" stroke-width="2.5"/>
         <text x="20" y="27.5" text-anchor="middle" fill="#fff" font-family="Alumni Sans, Impact, sans-serif" font-weight="700" font-size="21" letter-spacing="0.5">60</text>
@@ -528,7 +531,7 @@ footer{border-top:1px solid var(--line);padding:var(--s5) 0 var(--s3)}
         <div class="card-shot"><span class="card-time mono">40 мин</span><img src="img/svc-diag.jpg" alt="Диагностический сканер подключён к автомобилю" loading="lazy" width="800" height="600"></div>
         <div class="card-b">
           <h3>Диагностика</h3>
-          <p>Чтение ошибок по всем блокам и осмотр на подъёмнике. Отдаём письменную карту: что критично, что подождёт.</p>
+          <p>Чтение ошибок по всем блокам и осмотр на подъёмнике. Отдаём письменную карту: что критично, что подождёт.</p>
           <div class="card-price mono">от 1 200 ₽</div>
         </div>
       </article>
@@ -537,7 +540,7 @@ footer{border-top:1px solid var(--line);padding:var(--s5) 0 var(--s3)}
         <div class="card-shot"><span class="card-time mono">1,5 ч</span><img src="img/svc-service.jpg" alt="Цех автосервиса с инструментом и подъёмником" loading="lazy" width="800" height="600"></div>
         <div class="card-b">
           <h3>Техобслуживание</h3>
-          <p>Масло, фильтры, свечи, тормозная жидкость. Показываем снятое, чтобы вы видели, что меняли на самом деле.</p>
+          <p>Масло, фильтры, свечи, тормозная жидкость. Показываем снятое, чтобы вы видели, что меняли на самом деле.</p>
           <div class="card-price mono">от 2 900 ₽</div>
         </div>
       </article>
@@ -546,7 +549,7 @@ footer{border-top:1px solid var(--line);padding:var(--s5) 0 var(--s3)}
         <div class="card-shot"><span class="card-time mono">3–5 ч</span><img src="img/svc-chassis.jpg" alt="Автомобили на подъёмниках в ремонтной зоне" loading="lazy" width="800" height="600"></div>
         <div class="card-b">
           <h3>Ходовая</h3>
-          <p>Стойки, сайлентблоки, рычаги, тормоза. После — развал-схождение на стенде, чтобы руль стоял ровно.</p>
+          <p>Стойки, сайлентблоки, рычаги, тормоза. После — развал-схождение на стенде, чтобы руль стоял ровно.</p>
           <div class="card-price mono">от 4 400 ₽</div>
         </div>
       </article>
@@ -555,7 +558,7 @@ footer{border-top:1px solid var(--line);padding:var(--s5) 0 var(--s3)}
         <div class="card-shot"><span class="card-time mono">от 2 ч</span><img src="img/svc-electro.jpg" alt="Стена с инструментом в мастерской" loading="lazy" width="800" height="600"></div>
         <div class="card-b">
           <h3>Электрика</h3>
-          <p>Утечки тока, стартер, генератор, проводка. Ищем причину, а не меняем узлы по очереди за ваш счёт.</p>
+          <p>Утечки тока, стартер, генератор, проводка. Ищем причину, а не меняем узлы по очереди за ваш счёт.</p>
           <div class="card-price mono">от 1 900 ₽</div>
         </div>
       </article>
@@ -570,7 +573,7 @@ footer{border-top:1px solid var(--line);padding:var(--s5) 0 var(--s3)}
     <div>
       <div class="kicker">почему к нам</div>
       <h2>Сервис,<br>который держит слово</h2>
-      <p class="sec-sub">В автосервисе злит не цена, а неизвестность: сколько ждать, во сколько выльется, что вообще делали с машиной. Мы закрыли три этих вопроса правилами.</p>
+      <p class="sec-sub">В автосервисе злит не цена, а неизвестность: сколько ждать, во сколько выльется, что вообще делали с машиной. Мы закрыли три этих вопроса правилами.</p>
       <div class="pillars">
         <div class="pillar">
           <svg width="26" height="26" viewBox="0 0 26 26" fill="none" aria-hidden="true"><rect x="4" y="3" width="18" height="20" stroke="currentColor" stroke-width="2"/><path d="M8 9h10M8 13.5h10M8 18h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
@@ -580,7 +583,7 @@ footer{border-top:1px solid var(--line);padding:var(--s5) 0 var(--s3)}
         <div class="pillar">
           <svg width="26" height="26" viewBox="0 0 26 26" fill="none" aria-hidden="true"><circle cx="13" cy="13" r="10" stroke="currentColor" stroke-width="2"/><path d="M13 7v6l4 2.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
           <h3>Срок с датой</h3>
-          <p>Не «на неделе», а конкретный день. Сдвиг — звоним сразу, не ждём вашего приезда.</p>
+          <p>Не «на неделе», а конкретный день. Сдвиг — звоним сразу, не ждём вашего приезда.</p>
         </div>
         <div class="pillar">
           <svg width="26" height="26" viewBox="0 0 26 26" fill="none" aria-hidden="true"><rect x="3" y="6" width="20" height="15" stroke="currentColor" stroke-width="2"/><circle cx="13" cy="13.5" r="4" stroke="currentColor" stroke-width="2"/><path d="M9 6l1.6-2.5h4.8L17 6" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
@@ -593,7 +596,7 @@ footer{border-top:1px solid var(--line);padding:var(--s5) 0 var(--s3)}
     <!-- Демо-версия: заявка не уходит на сервер, форма показывает подтверждение. -->
     <form class="form-box rise" id="bookForm" novalidate>
       <h3>Запись на сервис</h3>
-      <p>Перезвоним в рабочее время и назовём дату, когда сможем взять машину.</p>
+      <p>Перезвоним в рабочее время и назовём дату, когда сможем взять машину.</p>
       <div class="fld">
         <label for="fName">Имя</label>
         <input id="fName" type="text" autocomplete="name" placeholder="Как к вам обращаться">
@@ -729,7 +732,7 @@ footer{border-top:1px solid var(--line);padding:var(--s5) 0 var(--s3)}
         <div class="tq-step">
           <div class="tq-n">03 · щелчок</div>
           <h3>110 Н·м. Точка</h3>
-          <p>Ключ щёлкнул — соединение затянуто по нормативу. Ни больше, ни меньше. То же самое мы делаем со сроками: называем цифру и попадаем в неё.</p>
+          <p>Ключ щёлкнул — соединение затянуто по нормативу. Ни больше, ни меньше. То же самое мы делаем со сроками: называем цифру и попадаем в неё.</p>
           <div class="tq-fact">Отсюда и название сервиса.</div>
         </div>
         <div class="tq-bar" id="tqBar" role="tablist" aria-label="Стадии затяжки">
@@ -782,7 +785,7 @@ footer{border-top:1px solid var(--line);padding:var(--s5) 0 var(--s3)}
         <div class="kicker">как это выглядит</div>
         <h2>Работа,<br>а не обещания</h2>
       </div>
-      <p class="sec-sub">Снимаем процесс, чтобы вы видели, что происходит с машиной, пока она у нас. Ролики отправляем в мессенджер по ходу ремонта.</p>
+      <p class="sec-sub">Снимаем процесс, чтобы вы видели, что происходит с машиной, пока она у нас. Ролики отправляем в мессенджер по ходу ремонта.</p>
     </div>
     <figure class="wv-frame rise">
       <video muted loop playsinline preload="none" poster="video/work-lift-poster.jpg" id="workVideo">
@@ -810,22 +813,22 @@ footer{border-top:1px solid var(--line);padding:var(--s5) 0 var(--s3)}
       <div class="step">
         <div class="step-t mono">ШАГ 01 · 20 минут</div>
         <h3>Приёмка</h3>
-        <p>Осматриваем машину вместе с вами, фиксируем пробег и видимые дефекты. Вы говорите симптомы своими словами.</p>
+        <p>Осматриваем машину вместе с вами, фиксируем пробег и видимые дефекты. Вы говорите симптомы своими словами.</p>
       </div>
       <div class="step">
         <div class="step-t mono">ШАГ 02 · 40 минут</div>
         <h3>Дефектовка</h3>
-        <p>Сканер и подъёмник. Пишем карту: что критично, что подождёт, что в норме. Карту отдаём на руки.</p>
+        <p>Сканер и подъёмник. Пишем карту: что критично, что подождёт, что в норме. Карту отдаём на руки.</p>
       </div>
       <div class="step">
         <div class="step-t mono">ШАГ 03 · согласование</div>
         <h3>Смета и дата</h3>
-        <p>Называем сумму и день выдачи. Пока вы не согласились — работы не идут и деньги не берутся.</p>
+        <p>Называем сумму и день выдачи. Пока вы не согласились — работы не идут и деньги не берутся.</p>
       </div>
       <div class="step">
         <div class="step-t mono">ШАГ 04 · по смете</div>
         <h3>Ремонт и выдача</h3>
-        <p>Фотоотчёт по этапам, снятые детали показываем. При выдаче — акт, чек и гарантийный талон.</p>
+        <p>Фотоотчёт по этапам, снятые детали показываем. При выдаче — акт, чек и гарантийный талон.</p>
       </div>
     </div>
   </div>
@@ -855,11 +858,11 @@ footer{border-top:1px solid var(--line);padding:var(--s5) 0 var(--s3)}
       <div class="rev-list">
         <blockquote class="rev">
           <span>Сказали — четверг, отдали в четверг. Меняли ремень ГРМ с помпой, назвали 12&nbsp;400 — столько и заплатил. Отдельное спасибо за то, что показали снятые ролики.</span>
-          <cite>— Сергей, Kia Ceed</cite>
+          <cite>— Сергей, Kia Ceed</cite>
         </blockquote>
         <blockquote class="rev">
           <span>Приехала с гулом в подвеске, боялась, что разведут на полный ремонт. Подняли на подъёмник, дали посмотреть самой, назвали причину — один подшипник. Сделали за день.</span>
-          <cite>— Марина, Renault Duster</cite>
+          <cite>— Марина, Renault Duster</cite>
         </blockquote>
       </div>
     </div>
@@ -874,7 +877,7 @@ footer{border-top:1px solid var(--line);padding:var(--s5) 0 var(--s3)}
         <div class="kicker">прайс</div>
         <h2>Цены и сроки</h2>
       </div>
-      <p class="sec-sub">Цена за законченную работу, вместе с расходниками. Запчасти считаются отдельно — можно привезти свои.</p>
+      <p class="sec-sub">Цена за законченную работу, вместе с расходниками. Запчасти считаются отдельно — можно привезти свои.</p>
     </div>
     <div class="price rise">
       <table>
@@ -945,7 +948,7 @@ footer{border-top:1px solid var(--line);padding:var(--s5) 0 var(--s3)}
   <div class="wrap">
     <div class="f-top">
       <div class="f-c">
-        <a href="#" class="logo">
+        <a href="#top" class="logo">
           <svg class="logo-m" viewBox="0 0 40 40" fill="none" aria-hidden="true">
             <rect x="1.5" y="1.5" width="37" height="37" stroke="#FFC400" stroke-width="2.5"/>
             <text x="20" y="27.5" text-anchor="middle" fill="#fff" font-family="Alumni Sans, Impact, sans-serif" font-weight="700" font-size="21" letter-spacing="0.5">60</text>
@@ -1258,6 +1261,27 @@ footer{border-top:1px solid var(--line);padding:var(--s5) 0 var(--s3)}
     var all = document.querySelectorAll(".rise");
     for (var m = 0; m < all.length; m++) all[m].style.opacity = "1";
   }
+})();
+</script>
+
+<script>
+/* после «Записаться» страница доезжала до формы, а фокус оставался на body:
+   с клавиатуры человек продолжал табать по странице, а не заполнять поля */
+(function(){
+  var form = document.querySelector('form');
+  if (!form) return;
+  document.addEventListener('click', function(e){
+    var a = e.target.closest('a[href^="#"]');
+    if (!a) return;
+    var id = a.getAttribute('href').slice(1);
+    if (!id) return;
+    var target = document.getElementById(id);
+    if (!target || !target.contains(form) && target !== form && !form.contains(target)) return;
+    setTimeout(function(){
+      var field = form.querySelector('input:not([type=hidden]):not([disabled]), textarea, select');
+      if (field) field.focus({ preventScroll: true });
+    }, 420);
+  });
 })();
 </script>
 </body>
