@@ -3,9 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- образец работы: от поисковиков закрыт, перед запуском строку убрать -->
 <meta name="robots" content="noindex">
 <title>ГАРАЖ 60 — автосервис в Пскове · Скажем, когда заберёте машину</title>
-<meta name="description" content="Автосервис в Пскове. Называем срок до начала работ и держим его. Диагностика, ТО, ходовая, электрика. Смета фиксируется, доплат нет.">
+<meta name="description" content="Автосервис в Пскове: называем срок до начала работ и держим его. Диагностика, ТО, ходовая, электрика. Смета фиксируется, доплат нет.">
 <meta name="theme-color" content="#17150F">
 <meta property="og:title" content="МОМЕНТ — автосервис в Пскове">
 <meta property="og:description" content="Скажем, когда заберёте машину. И вернём в этот срок.">
@@ -32,29 +33,51 @@
 
   --r-s:4px; --r-m:10px; --r-l:16px;
   --s1:8px; --s2:16px; --s3:24px; --s4:36px; --s5:56px; --s6:88px; --s7:124px;
+  /* шкала кеглей: шесть ступеней, соседние отличаются от 1,17 раза.
+     m1 микрометки, m2 мелкий текст, m3 основной, m4 подзаголовки,
+     m5 числа и крупные подзаголовки, m6 заголовки секций */
+  /* до 390 px ступени опускаются на шаг: в карточке шириной 328 px основной
+     текст кеглем 17 ложился по 28 знаков при норме от 30 */
+  --m1:clamp(11px,2.82vw,12px);
+  --m2:clamp(13px,3.33vw,14px);
+  --m3:clamp(16px,4.1vw,17px);
+  --m4:clamp(21px,2.1vw,26px);
+  --m5:clamp(32px,4.4vw,52px);
+  --m6:clamp(42px,7.4vw,96px);
   --max:1240px;
   --e:cubic-bezier(.2,.6,.35,1);
   --sh:0 2px 6px rgba(23,21,15,.07), 0 20px 50px rgba(23,21,15,.1);
 }
 
 *,*::before,*::after{box-sizing:border-box}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+/* запасная гарнитура с подогнанной шириной: пока грузится Alumni Sans,
+   строки ложатся так же, и первый экран не прыгает на 39 px.
+   Замер 27.09.2026: Alumni Sans — 80,7 % ширины Impact */
+@font-face{font-family:"Alumni Fb";src:local("Impact");size-adjust:80.7%}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;scroll-padding-top:96px;scroll-padding-bottom:96px;scrollbar-gutter:stable}
 body{
   margin:0;background:var(--soot);color:var(--white);
   font-family:Rubik,system-ui,-apple-system,"Segoe UI",sans-serif;
-  font-size:15px;line-height:1.45;-webkit-font-smoothing:antialiased;overflow-x:hidden;
+  font-size:var(--m3);line-height:1.45;-webkit-font-smoothing:antialiased;overflow-x:hidden;
 }
 img{max-width:100%;display:block}
 a{color:inherit}
 button{font:inherit;color:inherit}
-h1,h2,h3{
-  font-family:"Alumni Sans",Impact,system-ui,sans-serif;margin:0;
-  font-weight:800;line-height:.92;letter-spacing:-.01em;text-transform:uppercase;
+h1,h2{
+  font-family:"Alumni Sans","Alumni Fb",Impact,system-ui,sans-serif;margin:0;
+  font-weight:900;line-height:.92;letter-spacing:-.01em;text-transform:uppercase;
 }
-h1{font-size:clamp(52px,9.4vw,124px)}
-h2{font-size:clamp(34px,6.2vw,86px)}
-h3{font-size:clamp(22px,2.3vw,26px);line-height:1.06}
+/* подзаголовок бывает в четыре-шесть слов: прописные оставляем крупным
+   заголовкам, а h3 набираем обычным регистром */
+h3{font-family:"Alumni Sans","Alumni Fb",Impact,system-ui,sans-serif;margin:0;font-weight:900;
+  line-height:.92;letter-spacing:-.01em}
+h1{font-size:var(--m6)}
+h2{font-size:var(--m6)}
+h3{font-size:var(--m4);line-height:1.06}
 p{margin:0}
+p,li,blockquote,figcaption,dd,summary{text-wrap:pretty}
+h1,h2,h3{text-wrap:balance}
+.mono b,b.mono{font-weight:600}
 .mono{font-family:"Martian Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums;letter-spacing:-.04em}
 .wrap{max-width:var(--max);margin:0 auto;padding:0 clamp(16px,4vw,36px)}
 :focus-visible{outline:3px solid var(--mark);outline-offset:3px;border-radius:3px}
@@ -66,20 +89,25 @@ p{margin:0}
 .top-in{display:flex;align-items:center;gap:var(--s3);height:70px}
 .logo{display:flex;align-items:center;gap:11px;text-decoration:none;flex-shrink:0;padding:6px 0}
 .logo-m{width:36px;height:36px;flex-shrink:0}
-.logo-n{font-family:"Alumni Sans";font-weight:900;font-size:26px;letter-spacing:.02em;line-height:.9;display:block;text-transform:uppercase}
-.logo-s{font-family:"Martian Mono",monospace;font-size:8.5px;color:var(--steel);letter-spacing:.16em;text-transform:uppercase;display:block;margin-top:2px}
+.logo-n{font-family:"Alumni Sans","Alumni Fb",Impact,sans-serif;font-weight:900;font-size:var(--m4);letter-spacing:.02em;line-height:.9;display:block;text-transform:uppercase}
+.logo-s{font-family:"Martian Mono",monospace;font-size:var(--m1);color:var(--steel);letter-spacing:.16em;text-transform:uppercase;display:block;margin-top:2px}
+/* логотип с подписью не помещался в строку шапки на 320 px */
+@media (max-width:480px){.logo-s{display:none}}
 .nav{display:flex;margin-left:auto;gap:0}
-.nav a{color:#C4C7BF;text-decoration:none;font-size:15px;padding:10px 13px;transition:color .16s var(--e)}
+.nav a{color:#C4C7BF;text-decoration:none;font-size:var(--m3);padding:10px 13px;transition:color .16s var(--e)}
 .nav a:hover{color:var(--mark)}
 .top-r{display:flex;align-items:center;gap:14px;flex-shrink:0}
-.tel{font-family:"Martian Mono",monospace;font-size:13px;text-decoration:none;white-space:nowrap;padding:11px 0;display:flex;align-items:center;gap:8px}
+/* на 320 px номер и кнопка не помещались в строку шапки */
+@media (max-width:479px){.tel{display:none}}
+.tel{font-family:Rubik,system-ui,sans-serif;font-weight:600;font-size:var(--m2);text-decoration:none;white-space:nowrap;padding:11px 0;display:flex;align-items:center;gap:8px;color:inherit;min-height:46px}
+.tel:hover{color:var(--mark)}
 .tel:hover{color:var(--mark)}
 .burger{display:none;width:44px;height:44px;align-items:center;justify-content:center;background:var(--soot-3);border:0;cursor:pointer}
 
 /* ═══════════════ кнопки ═══════════════ */
 .btn{
   display:inline-flex;align-items:center;justify-content:center;gap:12px;min-height:54px;padding:0 26px;
-  font-weight:600;font-size:15px;text-decoration:none;cursor:pointer;border:1px solid transparent;
+  font-weight:600;font-size:var(--m3);text-decoration:none;cursor:pointer;border:1px solid transparent;
   text-transform:uppercase;letter-spacing:.04em;
   transition:background .2s var(--e),color .2s var(--e),border-color .2s var(--e),transform .16s var(--e);
 }
@@ -92,7 +120,7 @@ p{margin:0}
 .btn-line:hover{border-color:var(--mark);color:var(--mark)}
 .btn-dark{background:var(--soot);color:var(--white)}
 .btn-dark:hover{background:var(--soot-3)}
-.btn-s{min-height:46px;padding:0 18px;font-size:13px}
+.btn-s{min-height:46px;padding:0 18px;font-size:var(--m2)}
 
 /* ═══════════════ герой ═══════════════ */
 .hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line);isolation:isolate}
@@ -112,17 +140,17 @@ p{margin:0}
     radial-gradient(720px 400px at 74% 36%,rgba(255,196,0,.1),transparent 66%);
 }
 .hero-in{position:relative;z-index:2;padding:clamp(44px,6vw,88px) 0 0;min-height:min(86vh,820px);display:flex;flex-direction:column;justify-content:center}
-.hero h1{max-width:none;font-size:clamp(44px,7.6vw,104px)}
+.hero h1{max-width:none;font-size:var(--m6)}
 .hero h1 span{color:var(--mark);display:block}
 .hero-grid{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);gap:clamp(24px,4vw,52px);align-items:center}
-.hero-lead{margin-top:26px;font-size:clamp(15px,1.5vw,19px);color:#B7BAB2;max-width:34ch}
+.hero-lead{margin-top:26px;font-size:var(--m3);color:#B7BAB2;max-width:34ch}
 .hero-acts{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
 .hero-shot{position:relative;margin:0;aspect-ratio:4/3.2;overflow:hidden;border:1px solid var(--line);background:var(--soot-2)}
 .hero-shot img{width:100%;height:100%;object-fit:cover;filter:contrast(1.06) saturate(.9)}
 .hero-shot::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 52%,rgba(23,21,15,.9) 100%)}
-.hero-shot figcaption{
-  position:absolute;left:14px;bottom:12px;z-index:2;font-size:10px;letter-spacing:.12em;
-  text-transform:uppercase;color:#D6D9D2;
+.hero-shot figcaption{text-transform:none;letter-spacing:.06em;
+  position:absolute;left:14px;bottom:12px;z-index:2;font-size:var(--m1);letter-spacing:.06em;
+  color:#D6D9D2;
 }
 .facts{
   display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1px;margin-top:clamp(32px,4vw,52px);
@@ -130,25 +158,40 @@ p{margin:0}
 }
 .fact{background:var(--soot);padding:24px 22px;display:flex;gap:16px;align-items:flex-start}
 .fact svg{flex-shrink:0;color:var(--mark);margin-top:2px}
-.fact b{font-family:"Alumni Sans";font-weight:800;font-size:34px;line-height:.9;display:block;text-transform:uppercase}
-.fact i{font-style:normal;font-size:13px;color:var(--steel);display:block;margin-top:6px;line-height:1.35}
+.fact b{font-family:"Alumni Sans","Alumni Fb",Impact,sans-serif;font-weight:900;font-size:var(--m5);line-height:.9;display:block;text-transform:uppercase}
+.fact i{font-style:normal;font-size:var(--m2);color:var(--steel);display:block;margin-top:6px;line-height:1.35}
 
 /* ═══════════════ секции ═══════════════ */
 .sec{padding:clamp(56px,7vw,var(--s7)) 0}
+/* у соседних секций одного фона нижний отступ складывался с верхним:
+   между блоками выходило до 209 px воздуха при заданных 90 */
+.sec + .sec:not(.dark):not(.light){padding-top:0}
 .light{background:var(--bone);color:var(--soot)}
 .light .kicker{color:var(--mark-ink)}
 .light .sec-sub{color:#5F635C}
 .kicker{
-  font-family:"Martian Mono",monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;
+  font-family:"Martian Mono",monospace;font-size:var(--m1);letter-spacing:.2em;text-transform:uppercase;
   color:var(--mark);display:flex;align-items:center;gap:14px;margin-bottom:18px;
 }
 .kicker::after{content:"";height:1px;width:52px;background:currentColor;opacity:.5}
 .sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:var(--s4);margin-bottom:clamp(30px,4vw,var(--s5));flex-wrap:wrap}
-.sec-head > div{max-width:22ch}
-.sec-sub{color:#A9ADA4;font-size:15px;max-width:46ch;margin-top:18px}
+/* max-width в ch считался по кеглю обёртки, а не заголовка внутри:
+   h2 вылезал из своей колонки на 122–201 px */
+.sec-head > div{max-width:58%;min-width:0}
+@media (max-width:760px){.sec-head > div{max-width:100%}}
+.sec-head h2{text-wrap:balance}
+.sec-sub{color:#A9ADA4;font-size:var(--m3);max-width:46ch;margin-top:18px}
 
 /* ── услуги ── */
+/* в четырёх колонках описание услуги ложилось по 23–27 знаков: с 760 px
+   карточка разворачивается в строку, фото слева, текст справа */
 .svc{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:var(--s2)}
+@media (min-width:760px){
+  .svc{grid-template-columns:minmax(0,1fr)}
+  .svc .card{display:grid;grid-template-columns:minmax(0,.58fr) minmax(0,1fr)}
+  .svc .card-shot{aspect-ratio:auto;height:100%;min-height:220px}
+}
+@media (min-width:1200px){.svc{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .card{
   background:var(--soot-2);border:1px solid var(--line);display:flex;flex-direction:column;
   transition:border-color .24s var(--e),transform .24s var(--e),background .24s var(--e);
@@ -161,14 +204,16 @@ p{margin:0}
 .card-shot::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(23,21,15,.42) 100%);pointer-events:none}
 .card-time{
   position:absolute;top:12px;left:12px;z-index:2;background:var(--mark);color:var(--soot);
-  font-family:"Martian Mono",monospace;font-size:10px;font-weight:600;padding:6px 10px;letter-spacing:-.02em;
+  font-family:"Martian Mono",monospace;font-size:var(--m1);font-weight:600;padding:6px 10px;letter-spacing:-.02em;
 }
 .card-b{padding:22px;display:flex;flex-direction:column;flex:1}
+/* на телефоне поля карточек съедали строку до 27 знаков */
+@media (max-width:480px){.card-b{padding:18px 15px}.step{padding:20px 15px}.pillar{padding:20px 15px}.form-box{padding:20px 16px}}
 .card-b h3{margin-bottom:11px}
-.card-b p{font-size:15px;color:#A9ADA4;flex:1}
+.card-b p{font-size:var(--m3);color:#A9ADA4;flex:1}
 .light .card-b p{color:#5F635C}
 .card-price{
-  font-family:"Martian Mono",monospace;font-size:13px;color:var(--mark);
+  font-family:"Martian Mono",monospace;font-size:var(--m2);color:var(--mark);
   margin-top:18px;padding-top:16px;border-top:1px solid var(--line);
 }
 .light .card-price{color:var(--mark-ink);border-top-color:var(--line-lt)}
@@ -198,29 +243,35 @@ p{margin:0}
 .b-head{transform:translateZ(18px)}
 .b-top{transform:translateZ(30px)}
 /* накидной ключ поворачивается вместе с болтом и щёлкает на 100% */
+/* повёрнутый ключ выходил за линию содержимого на 51 px при 390 px:
+   на телефоне сцена сжимается, чтобы ключ вписался в колонку */
 .wrench{position:absolute;inset:0;transform-style:preserve-3d;transform:rotateX(52deg) rotateZ(calc(-24deg + var(--p,0) * 320deg))}
 .wrench svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible;transform:translateZ(46px)}
+/* повёрнутый ключ выходил за линию содержимого на 51–57 px при 390 px */
+@media (max-width:560px){.wrench{inset:24%}.wrench svg{overflow:hidden}}
 .gauge{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(122%,368px);aspect-ratio:1;pointer-events:none}
 .gauge svg{width:100%;height:100%;overflow:visible}
+/* кольцо шкалы шире сцены на 57 px при 390 px: на телефоне вписываем */
+@media (max-width:560px){.gauge{width:min(88%,280px)}.gauge svg{overflow:hidden}}
 .gauge-track{stroke:rgba(255,255,255,.1)}
 .gauge-fill{stroke:var(--mark);stroke-dasharray:1;stroke-dashoffset:calc(1 - min(1, var(--p,0) * 1.06) * .75);
   transition:stroke .3s var(--e)}
 .torque.done .gauge-fill{stroke:#7BE58B}
 .nm{position:absolute;left:50%;bottom:-6%;transform:translateX(-50%);text-align:center;white-space:nowrap}
-.nm b{font-family:"Alumni Sans";font-weight:900;font-size:clamp(44px,6vw,64px);line-height:.86;display:block;color:var(--mark);transition:color .3s var(--e)}
+.nm b{font-family:"Alumni Sans","Alumni Fb",Impact,sans-serif;font-weight:900;font-size:var(--m5);line-height:.86;display:block;color:var(--mark);transition:color .3s var(--e)}
 .torque.done .nm b{color:#7BE58B}
-.nm i{font-style:normal;font-family:"Martian Mono",monospace;font-size:10px;letter-spacing:.18em;color:var(--steel);text-transform:uppercase}
+.nm i{font-style:normal;font-family:"Martian Mono",monospace;font-size:var(--m1);letter-spacing:.18em;color:var(--steel);text-transform:uppercase}
 .tq-steps{position:relative}
 .tq-step{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;
   opacity:0;transform:translateY(18px);transition:opacity .4s var(--e),transform .4s var(--e);pointer-events:none}
 .tq-step.on{opacity:1;transform:none;pointer-events:auto;position:relative}
-.tq-n{font-family:"Martian Mono",monospace;font-size:10px;letter-spacing:.16em;color:var(--mark);margin-bottom:16px;text-transform:uppercase}
-.tq-step h3{font-size:clamp(26px,3.6vw,44px);margin-bottom:16px}
-.tq-step p{color:#A9ADA4;font-size:15px;max-width:40ch}
-.tq-fact{margin-top:24px;padding:16px 18px;border:1px solid var(--line);background:rgba(255,196,0,.07);font-size:15px;color:#E6E2D6}
+.tq-n{font-family:"Martian Mono",monospace;font-size:var(--m1);letter-spacing:.16em;color:var(--mark);margin-bottom:16px;text-transform:uppercase}
+.tq-step h3{font-size:var(--m5);margin-bottom:16px}
+.tq-step p{color:#A9ADA4;font-size:var(--m3);max-width:40ch}
+.tq-fact{margin-top:24px;padding:16px 18px;border:1px solid var(--line);background:rgba(255,196,0,.07);font-size:var(--m3);color:#E6E2D6}
 .tq-bar{display:flex;gap:8px;margin-top:32px}
 .tq-bar button{flex:1;min-height:44px;background:none;border:0;cursor:pointer;display:flex;flex-direction:column;justify-content:flex-end;gap:9px;padding:0}
-.tq-bar b{font-family:"Martian Mono",monospace;font-size:10px;letter-spacing:.1em;color:rgba(255,255,255,.55);text-align:left;font-weight:400;transition:color .3s var(--e)}
+.tq-bar b{font-family:Rubik,system-ui,sans-serif;font-size:var(--m1);letter-spacing:.1em;color:rgba(255,255,255,.55);text-align:left;font-weight:400;transition:color .3s var(--e)}
 .tq-bar button[aria-current="true"] b{color:var(--mark)}
 .tq-bar button:hover b{color:#fff}
 .tq-bar span{display:block;height:2px;background:rgba(255,255,255,.16);position:relative;overflow:hidden}
@@ -245,38 +296,39 @@ p{margin:0}
   background:linear-gradient(180deg,var(--soot) 0%,rgba(23,21,15,.86) 26%,rgba(23,21,15,.88) 74%,var(--soot) 100%);
 }
 .trust{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(28px,4vw,var(--s5));align-items:start}
-.pillars{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1px;background:var(--line);margin-top:var(--s4)}
+/* три правила в колонках по 190 px давали строку в 15 знаков */
+.pillars{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1px;background:var(--line);margin-top:var(--s4)}
 .pillar{background:var(--soot);padding:24px 20px}
 .pillar svg{color:var(--mark);margin-bottom:14px}
-.pillar h3{font-size:19px;margin-bottom:10px}
-.pillar p{font-size:13px;color:#A9ADA4}
+.pillar h3{font-size:var(--m4);margin-bottom:10px}
+.pillar p{font-size:var(--m2);color:#A9ADA4}
 .form-box{background:var(--soot-2);border:1px solid var(--line);padding:clamp(24px,3vw,var(--s4))}
-.form-box h3{font-size:clamp(26px,3vw,34px);margin-bottom:10px}
-.form-box > p{color:#A9ADA4;font-size:15px;margin-bottom:var(--s3)}
+.form-box h3{font-size:var(--m5);margin-bottom:10px}
+.form-box > p{color:#A9ADA4;font-size:var(--m3);margin-bottom:var(--s3)}
 .fld{margin-bottom:var(--s2)}
-.fld label{display:block;font-size:13px;color:#A9ADA4;margin-bottom:8px;letter-spacing:.02em}
+.fld label{display:block;font-size:var(--m2);color:#A9ADA4;margin-bottom:8px;letter-spacing:.02em}
 .fld input,.fld select,.fld textarea{
-  width:100%;min-height:54px;padding:15px 16px;font:inherit;font-size:15px;color:var(--white);
+  width:100%;min-height:54px;padding:15px 16px;font:inherit;font-size:var(--m3);color:var(--white);
   background:var(--soot);border:1px solid var(--line);transition:border-color .16s var(--e);
 }
 .fld textarea{min-height:92px;resize:vertical}
 .fld input::placeholder,.fld textarea::placeholder{color:#8A8F87}
 .fld input:focus,.fld select:focus,.fld textarea:focus{border-color:var(--mark);outline:none}
 .fld select{appearance:none;background-image:linear-gradient(45deg,transparent 50%,var(--steel) 50%),linear-gradient(135deg,var(--steel) 50%,transparent 50%);background-position:calc(100% - 20px) 24px,calc(100% - 14px) 24px;background-size:6px 6px;background-repeat:no-repeat}
-.err{color:var(--alert);font-size:13px;margin-top:6px;display:none}
+.err{color:var(--alert);font-size:var(--m2);margin-top:6px;display:none}
 .fld.bad input,.fld.bad select{border-color:var(--alert)}
 .fld.bad .err{display:block}
-.consent{display:flex;gap:12px;align-items:flex-start;font-size:13px;color:#8E938B;margin:var(--s2) 0;min-height:48px;padding:3px 0;cursor:pointer}
+.consent{display:flex;gap:12px;align-items:flex-start;font-size:var(--m2);color:#8E938B;margin:var(--s2) 0;min-height:48px;padding:3px 0;cursor:pointer}
 .consent input{width:22px;height:22px;margin-top:1px;flex-shrink:0;accent-color:var(--mark)}
-.ok{display:none;margin-top:var(--s2);padding:15px;background:rgba(255,196,0,.12);border:1px solid rgba(255,196,0,.4);color:#FFE08A;font-size:15px}
+.ok{display:none;margin-top:var(--s2);padding:15px;background:rgba(255,196,0,.12);border:1px solid rgba(255,196,0,.4);color:#FFE08A;font-size:var(--m3)}
 .ok.on{display:block}
-.safe{display:flex;gap:11px;align-items:flex-start;margin-top:var(--s2);font-size:13px;color:#92988F}
+.safe{display:flex;gap:11px;align-items:flex-start;margin-top:var(--s2);font-size:var(--m2);color:#92988F}
 .safe svg{flex-shrink:0;margin-top:1px}
 
 /* ── калькулятор простоя ── */
 .timer{display:grid;grid-template-columns:1.3fr .7fr;gap:var(--s2);align-items:start}
 .works{background:var(--white);border:1px solid var(--line-lt)}
-.works-h{display:grid;grid-template-columns:1fr 96px 84px;gap:12px;padding:14px 22px;background:var(--soot);color:var(--steel);font-family:"Martian Mono",monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase}
+.works-h{display:grid;grid-template-columns:1fr 96px 84px;gap:12px;padding:14px 22px;background:var(--soot);color:var(--steel);font-family:"Martian Mono",monospace;font-size:var(--m1);letter-spacing:.14em;text-transform:uppercase}
 .works-h span:nth-child(2),.works-h span:nth-child(3){text-align:right}
 .wrow{display:grid;grid-template-columns:1fr 96px 84px;gap:12px;align-items:center;padding:0 22px;border-bottom:1px solid var(--line-lt);transition:background .16s var(--e)}
 .wrow:last-child{border-bottom:0}
@@ -288,25 +340,26 @@ p{margin:0}
 .box svg{opacity:0;transform:scale(.6);transition:all .16s var(--e)}
 .wrow input:checked + .box{background:var(--mark);border-color:var(--mark)}
 .wrow input:checked + .box svg{opacity:1;transform:scale(1)}
-.wrow input:focus-visible + .box{outline:3px solid var(--mark);outline-offset:2px}
-.wrow-n{font-size:15px;line-height:1.3}
-.wrow-t,.wrow-p{font-family:"Martian Mono",monospace;font-size:13px;text-align:right;color:#5F635C;white-space:nowrap}
+/* жёлтая обводка на белом давала 2,45:1 — берём тёмную линию по норме 3:1 */
+.wrow input:focus-visible + .box{outline:3px solid var(--soot);outline-offset:2px}
+.wrow-n{font-size:var(--m3);line-height:1.3}
+.wrow-t,.wrow-p{font-family:"Martian Mono",monospace;font-size:var(--m2);text-align:right;color:#5F635C;white-space:nowrap}
 .wrow.on .wrow-t,.wrow.on .wrow-p{color:var(--soot);font-weight:500}
 .result{background:var(--soot);border:1px solid var(--line);padding:var(--s3);position:sticky;top:92px}
-.res-k{font-family:"Martian Mono",monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--steel)}
-.res-big{font-family:"Alumni Sans";font-weight:900;font-size:clamp(44px,6vw,64px);line-height:.86;color:var(--mark);margin:10px 0 4px;text-transform:uppercase}
-.res-sub{font-size:13px;color:#A9ADA4}
+.res-k{font-family:"Martian Mono",monospace;font-size:var(--m1);letter-spacing:.16em;text-transform:uppercase;color:var(--steel)}
+.res-big{font-family:"Alumni Sans","Alumni Fb",Impact,sans-serif;font-weight:900;font-size:var(--m5);line-height:.86;color:var(--mark);margin:10px 0 4px;text-transform:uppercase}
+.res-sub{font-size:var(--m2);color:#A9ADA4}
 .res-split{display:grid;gap:1px;background:var(--line);margin-top:var(--s3);border:1px solid var(--line)}
-.res-split div{background:var(--soot);padding:14px 16px;display:flex;justify-content:space-between;gap:12px;font-size:13px}
-.res-split b{font-family:"Martian Mono",monospace;font-weight:500}
-.res-note{font-size:13px;color:#92988F;line-height:1.5;margin-top:16px}
+.res-split div{background:var(--soot);padding:14px 16px;display:flex;justify-content:space-between;gap:12px;font-size:var(--m2)}
+.res-split b{font-family:"Martian Mono",monospace;font-weight:600}
+.res-note{font-size:var(--m2);color:#92988F;line-height:1.5;margin-top:16px}
 .result .btn{width:100%;margin-top:18px}
 
 /* ── видео работы ── */
 .wv-frame{position:relative;margin:0;aspect-ratio:16/9;overflow:hidden;border:1px solid var(--line);background:var(--soot-2)}
 .wv-frame video{width:100%;height:100%;object-fit:cover;filter:contrast(1.06) saturate(.94) brightness(.92)}
 .wv-frame::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 60%,rgba(23,21,15,.85));pointer-events:none}
-.wv-frame figcaption{position:absolute;left:18px;bottom:16px;z-index:2;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#D6D9D2}
+.wv-frame figcaption{position:absolute;left:18px;bottom:16px;z-index:2;font-size:var(--m1);letter-spacing:.06em;color:#D6D9D2}
 .wv-play{
   position:absolute;right:18px;bottom:14px;z-index:3;width:52px;height:52px;border:0;cursor:pointer;
   background:var(--mark);color:var(--soot);display:grid;place-items:center;transition:background .2s var(--e),transform .2s var(--e);
@@ -316,41 +369,45 @@ p{margin:0}
 .wv-frame.playing .wv-play::after{content:"";width:14px;height:16px;border-left:4px solid currentColor;border-right:4px solid currentColor}
 
 /* ── процесс ── */
-.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(216px,1fr));gap:1px;background:var(--line-lt)}
+/* четыре шага раскладывались по 248 px и ложились по 17 знаков в строку */
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:1px;background:var(--line-lt)}
+/* четыре шага в три колонки оставляли две пустые клетки */
+@media (min-width:760px){.steps{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .step{background:var(--bone);color:var(--soot);padding:26px 22px;position:relative}
-.step-t{font-family:"Martian Mono",monospace;font-size:10px;color:var(--mark-ink);letter-spacing:.1em;margin-bottom:14px}
-.step h3{font-size:22px;margin-bottom:10px}
-.step p{font-size:15px;color:#5F635C}
+.step-t{font-family:"Martian Mono",monospace;font-size:var(--m1);color:var(--mark-ink);letter-spacing:.1em;margin-bottom:14px}
+.step h3{font-size:var(--m4);margin-bottom:10px}
+.step p{font-size:var(--m3);color:#5F635C}
 
 /* ── отзывы ── */
 .revs{display:grid;grid-template-columns:auto 1fr;gap:var(--s3);align-items:center;background:var(--soot-2);border:1px solid var(--line);padding:clamp(22px,3vw,var(--s4))}
 .score{text-align:center;padding-right:var(--s3);border-right:1px solid var(--line)}
-.score b{font-family:"Alumni Sans";font-weight:900;font-size:64px;line-height:.85;display:block}
+.score b{font-family:"Alumni Sans","Alumni Fb",Impact,sans-serif;font-weight:900;font-size:var(--m5);line-height:.85;display:block}
 .stars{display:flex;gap:3px;justify-content:center;color:var(--mark);margin:10px 0 8px}
-.score i{font-style:normal;font-size:13px;color:var(--steel);font-family:"Martian Mono",monospace}
+.score i{font-style:normal;font-size:var(--m2);color:var(--steel);font-family:"Martian Mono",monospace}
 .rev-list{display:grid;gap:var(--s2)}
-.rev{font-size:15px;line-height:1.55}
-.rev cite{display:block;font-style:normal;font-size:13px;color:var(--steel);margin-top:8px;font-family:"Martian Mono",monospace}
+.rev{margin:0;font-size:var(--m3);line-height:1.5;max-width:64ch}
+.rev cite{display:block;font-style:normal;font-size:var(--m2);color:var(--steel);margin-top:8px;font-family:"Martian Mono",monospace}
 
 /* ── прайс ── */
 .price{background:var(--white);border:1px solid var(--line-lt);overflow-x:auto}
+.price:focus-visible{outline:3px solid var(--soot);outline-offset:2px}
 .price table{width:100%;border-collapse:collapse;min-width:520px}
-.price th{text-align:left;padding:16px 22px;background:var(--soot);color:var(--white);font-family:"Alumni Sans";font-weight:700;font-size:19px;text-transform:uppercase;letter-spacing:.02em}
+.price th{font-weight:900;text-align:left;padding:16px 22px;background:var(--soot);color:var(--white);font-family:"Alumni Sans","Alumni Fb",Impact,sans-serif;font-weight:700;font-size:var(--m4);text-transform:uppercase;letter-spacing:.02em}
 .price th:not(:first-child){text-align:right}
-.price td{padding:15px 22px;border-bottom:1px solid var(--line-lt);font-size:15px}
-.price td:not(:first-child){text-align:right;font-family:"Martian Mono",monospace;font-size:13px;white-space:nowrap}
+.price td{padding:15px 22px;border-bottom:1px solid var(--line-lt);font-size:var(--m3)}
+.price td:not(:first-child){text-align:right;font-family:"Martian Mono",monospace;font-size:var(--m2);white-space:nowrap}
 .price tr:last-child td{border-bottom:0}
 .price tbody tr:hover{background:var(--bone-2)}
 
 /* ── faq ── */
 .faq{max-width:860px}
 .q{border-bottom:1px solid var(--line);margin:0}
-.q summary{cursor:pointer;list-style:none;padding:22px 0;font-family:"Alumni Sans";font-weight:700;font-size:clamp(19px,2.2vw,26px);text-transform:uppercase;display:flex;justify-content:space-between;gap:20px;align-items:center;min-height:58px;transition:color .18s var(--e)}
+.q summary{cursor:pointer;list-style:none;padding:22px 0;font-family:Rubik,system-ui,sans-serif;font-weight:600;font-size:var(--m4);text-transform:uppercase;display:flex;justify-content:space-between;gap:20px;align-items:center;min-height:58px;transition:color .18s var(--e);text-transform:none}
 .q summary::-webkit-details-marker{display:none}
 .q summary:hover{color:var(--mark)}
-.q summary::after{content:"+";font-family:"Martian Mono",monospace;font-size:22px;color:var(--mark);flex-shrink:0;transition:transform .24s var(--e)}
+.q summary::after{content:"+";font-family:"Martian Mono",monospace;font-size:var(--m4);color:var(--mark);flex-shrink:0;transition:transform .24s var(--e)}
 .q[open] summary::after{transform:rotate(45deg)}
-.q-a{padding:0 0 24px;color:#A9ADA4;font-size:15px;max-width:70ch}
+.q-a{padding:0 0 24px;color:#A9ADA4;font-size:var(--m3);max-width:70ch}
 
 /* ── контакты ── */
 .contacts{display:grid;grid-template-columns:.9fr 1.1fr;gap:var(--s2)}
@@ -358,13 +415,14 @@ p{margin:0}
 .c-row{display:flex;gap:14px;padding:15px 0;border-bottom:1px solid var(--line);align-items:flex-start}
 .c-row:last-child{border-bottom:0}
 .c-row svg{flex-shrink:0;color:var(--mark);margin-top:2px}
-.c-k{font-size:13px;color:var(--steel);font-family:"Martian Mono",monospace;letter-spacing:.06em}
-.c-v{font-size:15px;margin-top:4px}
+.c-k{font-size:var(--m2);color:var(--steel);font-family:"Martian Mono",monospace;letter-spacing:.06em}
+.c-v{font-size:var(--m3);margin-top:4px}
 .c-v a{text-decoration:none;display:inline-block;padding:10px 0;margin:-10px 0}
 .c-v a:hover{color:var(--mark)}
 .map{background:linear-gradient(150deg,#26231B,#312D22);border:1px solid var(--line);display:grid;place-items:center;min-height:280px;position:relative}
 .map::after{content:"";position:absolute;inset:0;background-image:repeating-linear-gradient(0deg,rgba(255,255,255,.03) 0 1px,transparent 1px 40px),repeating-linear-gradient(90deg,rgba(255,255,255,.03) 0 1px,transparent 1px 40px)}
-.map span{position:relative;z-index:1;font-family:"Martian Mono",monospace;font-size:10px;color:var(--steel);text-align:center;line-height:2;padding:0 20px}
+.map b{font-weight:600}
+.map span{position:relative;z-index:1;font-family:"Martian Mono",monospace;font-size:var(--m1);color:var(--steel);text-align:center;line-height:2;padding:0 20px}
 
 /* ── незаполненное ── */
 .todo{color:#9BA097;border-bottom:1px dashed var(--mark);background:rgba(255,196,0,.09);padding:1px 6px}
@@ -374,15 +432,18 @@ a.todo{display:inline-block;padding:11px 6px;margin:-11px 0}
 /* ── футер ── */
 footer{border-top:1px solid var(--line);padding:var(--s5) 0 var(--s3)}
 .f-top{display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:var(--s4);padding-bottom:var(--s4);border-bottom:1px solid var(--line)}
-.f-c h4{font-family:"Alumni Sans";font-weight:700;font-size:19px;text-transform:uppercase;margin-bottom:16px}
-.f-c a,.f-c span{display:block;color:#A9ADA4;text-decoration:none;padding:10px 0;font-size:15px}
+.f-c h4{font-family:"Alumni Sans","Alumni Fb",Impact,sans-serif;font-weight:900;font-size:var(--m4);text-transform:uppercase;margin-bottom:16px}
+.f-c a,.f-c span{display:block;color:#A9ADA4;text-decoration:none;padding:10px 0;font-size:var(--m3)}
 .f-c a:hover{color:var(--mark)}
-.f-ab{font-size:15px;color:#8E938B;margin-top:16px;max-width:34em;line-height:1.45}
-.f-bot{display:flex;justify-content:space-between;gap:var(--s2);flex-wrap:wrap;padding-top:var(--s3);font-size:13px;color:#92988F}
+.f-ab{font-size:var(--m3);color:#8E938B;margin-top:16px;max-width:34em;line-height:1.45}
+.f-bot{display:flex;justify-content:space-between;gap:var(--s2);flex-wrap:wrap;padding-top:var(--s3);font-size:var(--m2);color:#92988F}
+.f-docs{display:flex;gap:var(--s3);flex-wrap:wrap}
+.f-docs a{color:#A9ADA4;text-decoration:underline;text-underline-offset:3px;display:inline-flex;align-items:center;min-height:46px}
+.f-docs a:hover{color:var(--mark)}
 
 .rise{opacity:0}
 /* ═══════════════ адаптив ═══════════════ */
-@media (max-width:1100px){ .tel span{display:none} .nav a{padding:10px 10px;font-size:13px} }
+@media (max-width:1100px){ .tel span{display:none} .nav a{padding:10px 10px;font-size:var(--m2)} }
 @media (max-width:1024px){
   .hero-grid{grid-template-columns:1fr}
   .trust,.timer,.contacts{grid-template-columns:1fr}
@@ -392,7 +453,7 @@ footer{border-top:1px solid var(--line);padding:var(--s5) 0 var(--s3)}
 @media (max-width:940px){
   .nav{display:none;position:absolute;top:70px;left:0;right:0;background:var(--soot);flex-direction:column;padding:10px 16px 18px;border-bottom:1px solid var(--line)}
   .nav.open{display:flex}
-  .nav a{padding:14px 12px;font-size:15px}
+  .nav a{padding:14px 12px;font-size:var(--m3)}
   .burger{display:flex}
 }
 @media (max-width:768px){
@@ -446,10 +507,10 @@ footer{border-top:1px solid var(--line);padding:var(--s5) 0 var(--s3)}
       <a href="#contacts">Контакты</a>
     </nav>
     <div class="top-r">
-      <span class="tel" aria-label="телефон">
+      <a class="tel" href="tel:+78112504030" aria-label="Позвонить в сервис">
         <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.2 2h2.4l1.1 2.9-1.5 1.1a9 9 0 0 0 4.3 4.3l1.1-1.5 2.9 1.1v2.4a1.2 1.2 0 0 1-1.3 1.2A11.5 11.5 0 0 1 2 3.3 1.2 1.2 0 0 1 3.2 2z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
         <span>+7 (8112) 50-40-30</span>
-      </span>
+      </a>
       <a class="btn btn-mark btn-s" href="#book">Записаться</a>
       <button class="burger" id="burger" aria-label="Меню" aria-expanded="false" aria-controls="nav">
         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M2 5h16M2 10h16M2 15h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
@@ -464,7 +525,7 @@ footer{border-top:1px solid var(--line);padding:var(--s5) 0 var(--s3)}
 <section class="hero">
   <div class="hero-media" id="heroMedia" aria-hidden="true">
     <img src="video/hero-oil-poster.jpg" alt="" width="1280" height="720">
-    <video muted loop playsinline preload="none" poster="video/hero-oil-poster.jpg">
+    <video muted loop playsinline preload="none" disablepictureinpicture controlslist="nodownload noplaybackrate noremoteplayback" poster="video/hero-oil-poster.jpg">
       <source src="video/hero-oil.mp4" type="video/mp4">
     </video>
   </div>
@@ -520,8 +581,7 @@ footer{border-top:1px solid var(--line);padding:var(--s5) 0 var(--s3)}
   <div class="wrap">
     <div class="sec-head">
       <div>
-        <div class="kicker">услуги</div>
-        <h2>Что делаем</h2>
+                <h2>Что делаем</h2>
       </div>
       <p class="sec-sub">Под каждой работой — сколько машина простоит у нас. Не «приезжайте, посмотрим», а конкретные часы.</p>
     </div>
@@ -531,7 +591,7 @@ footer{border-top:1px solid var(--line);padding:var(--s5) 0 var(--s3)}
         <div class="card-shot"><span class="card-time mono">40 мин</span><img src="img/svc-diag.jpg" alt="Диагностический сканер подключён к автомобилю" loading="lazy" width="800" height="600"></div>
         <div class="card-b">
           <h3>Диагностика</h3>
-          <p>Чтение ошибок по всем блокам и осмотр на подъёмнике. Отдаём письменную карту: что критично, что подождёт.</p>
+          <p>Чтение ошибок по всем блокам и осмотр на подъёмнике. Отдаём письменную карту: что критично, что подождёт.</p>
           <div class="card-price mono">от 1 200 ₽</div>
         </div>
       </article>
@@ -540,7 +600,7 @@ footer{border-top:1px solid var(--line);padding:var(--s5) 0 var(--s3)}
         <div class="card-shot"><span class="card-time mono">1,5 ч</span><img src="img/svc-service.jpg" alt="Цех автосервиса с инструментом и подъёмником" loading="lazy" width="800" height="600"></div>
         <div class="card-b">
           <h3>Техобслуживание</h3>
-          <p>Масло, фильтры, свечи, тормозная жидкость. Показываем снятое, чтобы вы видели, что меняли на самом деле.</p>
+          <p>Масло, фильтры, свечи, тормозная жидкость. Показываем снятое, чтобы вы видели, что меняли на самом деле.</p>
           <div class="card-price mono">от 2 900 ₽</div>
         </div>
       </article>
@@ -572,7 +632,7 @@ footer{border-top:1px solid var(--line);padding:var(--s5) 0 var(--s3)}
   <div class="wrap trust">
     <div>
       <div class="kicker">почему к нам</div>
-      <h2>Сервис,<br>который держит слово</h2>
+      <h2>Держим<br>слово</h2>
       <p class="sec-sub">В автосервисе злит не цена, а неизвестность: сколько ждать, во сколько выльется, что вообще делали с машиной. Мы закрыли три этих вопроса правилами.</p>
       <div class="pillars">
         <div class="pillar">
@@ -596,7 +656,7 @@ footer{border-top:1px solid var(--line);padding:var(--s5) 0 var(--s3)}
     <!-- Демо-версия: заявка не уходит на сервер, форма показывает подтверждение. -->
     <form class="form-box rise" id="bookForm" novalidate>
       <h3>Запись на сервис</h3>
-      <p>Перезвоним в рабочее время и назовём дату, когда сможем взять машину.</p>
+      <p>Звоним в рабочее время и сразу даём дату, когда берём машину в цех.</p>
       <div class="fld">
         <label for="fName">Имя</label>
         <input id="fName" type="text" autocomplete="name" placeholder="Как к вам обращаться">
@@ -626,7 +686,7 @@ footer{border-top:1px solid var(--line);padding:var(--s5) 0 var(--s3)}
       </div>
       <label class="consent">
         <input type="checkbox" id="fOk">
-        <span>Согласен на обработку персональных данных по <a href="#privacy">политике конфиденциальности</a>. Номер нужен только для записи.</span>
+        <span>Согласен на <a href="soglasie.html" target="_blank" rel="noopener">обработку персональных данных</a>. Номер нужен только для записи.</span>
       </label>
       <button type="submit" class="btn btn-mark" style="width:100%">
         Оставить заявку
@@ -720,7 +780,7 @@ footer{border-top:1px solid var(--line);padding:var(--s5) 0 var(--s3)}
         <div class="tq-step on">
           <div class="tq-n">01 · от руки</div>
           <h3>«Затянули как надо» — это не цифра</h3>
-          <p>Колёсный болт, затянутый на глаз, откручивается сам или срывает резьбу. Разница между «нормально» и «правильно» — измеримая величина.</p>
+          <p>Колёсный болт, затянутый на глаз, откручивается сам или срывает резьбу: разницу между «нормально» и «правильно» мы измеряем ключом.</p>
           <div class="tq-fact">Недотяг на 30 Н·м — и через 200 км болт ослаб.</div>
         </div>
         <div class="tq-step">
@@ -750,8 +810,7 @@ footer{border-top:1px solid var(--line);padding:var(--s5) 0 var(--s3)}
   <div class="wrap">
     <div class="sec-head">
       <div>
-        <div class="kicker">сроки</div>
-        <h2>Сколько<br>машина простоит</h2>
+                <h2>Сколько<br>машина простоит</h2>
       </div>
       <p class="sec-sub">Отметьте работы — увидите, сколько часов машина будет у нас и в какой день её можно забрать. Считаем по нормативам, а не на глаз.</p>
     </div>
@@ -771,7 +830,7 @@ footer{border-top:1px solid var(--line);padding:var(--s5) 0 var(--s3)}
           <div><span>Стоимость работ</span><b class="mono" id="resPrice">—</b></div>
         </div>
         <p class="res-note">Расчёт по нормативам времени. Точную дату называет мастер после осмотра — она фиксируется в заказ-наряде и не сдвигается без предупреждения.</p>
-        <a class="btn btn-mark" href="#book" id="calcGo">Записаться на эти работы</a>
+        <a class="btn btn-mark" href="#book" id="calcGo">Записаться на работы</a>
       </aside>
     </div>
   </div>
@@ -788,7 +847,7 @@ footer{border-top:1px solid var(--line);padding:var(--s5) 0 var(--s3)}
       <p class="sec-sub">Снимаем процесс, чтобы вы видели, что происходит с машиной, пока она у нас. Ролики отправляем в мессенджер по ходу ремонта.</p>
     </div>
     <figure class="wv-frame rise">
-      <video muted loop playsinline preload="none" poster="video/work-lift-poster.jpg" id="workVideo">
+      <video muted loop playsinline preload="none" disablepictureinpicture controlslist="nodownload noplaybackrate noremoteplayback" poster="video/work-lift-poster.jpg" id="workVideo">
         <source src="video/work-lift.mp4" type="video/mp4">
       </video>
       <figcaption class="mono">осмотр ходовой на подъёмнике</figcaption>
@@ -807,7 +866,7 @@ footer{border-top:1px solid var(--line);padding:var(--s5) 0 var(--s3)}
         <div class="kicker">как проходит ремонт</div>
         <h2>Четыре шага</h2>
       </div>
-      <p class="sec-sub">Порядок один для всех работ — от замены масла до перебора подвески.</p>
+      <p class="sec-sub">Порядок держим один для всех работ, от замены масла до перебора подвески.</p>
     </div>
     <div class="steps">
       <div class="step">
@@ -818,7 +877,7 @@ footer{border-top:1px solid var(--line);padding:var(--s5) 0 var(--s3)}
       <div class="step">
         <div class="step-t mono">ШАГ 02 · 40 минут</div>
         <h3>Дефектовка</h3>
-        <p>Сканер и подъёмник. Пишем карту: что критично, что подождёт, что в норме. Карту отдаём на руки.</p>
+        <p>Ставим на подъёмник, цепляем сканер и пишем карту: что срочно, что ждёт, что в норме. Карту отдаём на руки.</p>
       </div>
       <div class="step">
         <div class="step-t mono">ШАГ 03 · согласование</div>
@@ -828,7 +887,7 @@ footer{border-top:1px solid var(--line);padding:var(--s5) 0 var(--s3)}
       <div class="step">
         <div class="step-t mono">ШАГ 04 · по смете</div>
         <h3>Ремонт и выдача</h3>
-        <p>Фотоотчёт по этапам, снятые детали показываем. При выдаче — акт, чек и гарантийный талон.</p>
+        <p>Снимаем этапы на фото и показываем снятые детали, а при выдаче отдаём акт, чек и гарантийный талон.</p>
       </div>
     </div>
   </div>
@@ -839,8 +898,7 @@ footer{border-top:1px solid var(--line);padding:var(--s5) 0 var(--s3)}
   <div class="wrap">
     <div class="sec-head">
       <div>
-        <div class="kicker">отзывы</div>
-        <h2>Что говорят</h2>
+                <h2>Что говорят</h2>
       </div>
     </div>
     <div class="revs rise">
@@ -861,7 +919,7 @@ footer{border-top:1px solid var(--line);padding:var(--s5) 0 var(--s3)}
           <cite>— Сергей, Kia Ceed</cite>
         </blockquote>
         <blockquote class="rev">
-          <span>Приехала с гулом в подвеске, боялась, что разведут на полный ремонт. Подняли на подъёмник, дали посмотреть самой, назвали причину — один подшипник. Сделали за день.</span>
+          <span>Приехала с гулом в подвеске, боялась, что разведут на полный ремонт. Подняли на подъёмник, дали посмотреть самой, назвали причину — один подшипник, и сделали всё за день.</span>
           <cite>— Марина, Renault Duster</cite>
         </blockquote>
       </div>
@@ -874,12 +932,11 @@ footer{border-top:1px solid var(--line);padding:var(--s5) 0 var(--s3)}
   <div class="wrap">
     <div class="sec-head">
       <div>
-        <div class="kicker">прайс</div>
-        <h2>Цены и сроки</h2>
+                <h2>Цены и сроки</h2>
       </div>
       <p class="sec-sub">Цена за законченную работу, вместе с расходниками. Запчасти считаются отдельно — можно привезти свои.</p>
     </div>
-    <div class="price rise">
+    <div class="price rise" role="region" aria-label="Прайс и сроки" tabindex="0">
       <table>
         <thead><tr><th>Работа</th><th>Время</th><th>Цена</th></tr></thead>
         <tbody id="priceRows"></tbody>
@@ -893,15 +950,14 @@ footer{border-top:1px solid var(--line);padding:var(--s5) 0 var(--s3)}
   <div class="wrap">
     <div class="sec-head">
       <div>
-        <div class="kicker">вопросы</div>
-        <h2>Спрашивают<br>до записи</h2>
+                <h2>Спрашивают<br>до записи</h2>
       </div>
     </div>
     <div class="faq">
       <details class="q"><summary>Можно привезти свои запчасти?</summary><div class="q-a">Да, тогда платите только за работу. Гарантия в этом случае распространяется на работу — на саму деталь её даёт продавец. Если увидим брак, скажем до установки.</div></details>
-      <details class="q"><summary>А если по ходу найдётся что-то ещё?</summary><div class="q-a">Останавливаемся и звоним. Присылаем фото и новую сумму. Пока не согласовали — работа стоит, деньги за простой не берём. Можете забрать машину, оплатив только согласованное.</div></details>
+      <details class="q"><summary>А если по ходу найдётся что-то ещё?</summary><div class="q-a">Останавливаемся и звоним, присылаем фото и новую сумму. Пока не согласовали — работа стоит, деньги за простой не берём. Можете забрать машину, оплатив только согласованное.</div></details>
       <details class="q"><summary>Что если не уложитесь в срок?</summary><div class="q-a">Предупреждаем в тот же день, когда стало понятно, — обычно это задержка поставщика запчастей. Не ставим перед фактом при выдаче.</div></details>
-      <details class="q"><summary>Даёте документы?</summary><div class="q-a">Заказ-наряд с перечнем работ и суммой — до начала. Акт, чек и гарантийный талон — при выдаче.</div></details>
+      <details class="q"><summary>Даёте документы?</summary><div class="q-a">Заказ-наряд с перечнем работ и суммой отдаём до начала, а акт, чек и гарантийный талон — при выдаче.</div></details>
       <details class="q"><summary>Работаете с юрлицами?</summary><div class="q-a">Да, по договору с отсрочкой и закрывающими документами. Для автопарков условия обсуждаются отдельно.</div></details>
       <details class="q"><summary>Есть ли эвакуатор?</summary><div class="q-a">Своего нет, работаем с партнёром. По городу подача — 2&nbsp;000&nbsp;₽, платите водителю напрямую. Позвоните, вызовем сами и встретим машину в цеху.</div></details>
     </div>
@@ -913,15 +969,14 @@ footer{border-top:1px solid var(--line);padding:var(--s5) 0 var(--s3)}
   <div class="wrap">
     <div class="sec-head">
       <div>
-        <div class="kicker">контакты</div>
-        <h2>Где нас найти</h2>
+                <h2>Где нас найти</h2>
       </div>
     </div>
     <div class="contacts">
       <div class="c-card rise">
         <div class="c-row">
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M10 18s6.5-5.2 6.5-10a6.5 6.5 0 1 0-13 0c0 4.8 6.5 10 6.5 10z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="10" cy="8" r="2.4" stroke="currentColor" stroke-width="1.8"/></svg>
-          <div><div class="c-k">АДРЕС</div><div class="c-v">Псков, ул. Леона Поземского, 118, корпус 3<br><span style="opacity:.7">въезд со стороны Алмазной, синие ворота</span></div></div>
+          <div><div class="c-k">АДРЕС</div><div class="c-v">Псков, ул. Леона Поземского, 118, корпус 3<br><span style="opacity:.7">въезд со стороны Алмазной, синие ворота</span></div></div>
         </div>
         <div class="c-row">
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4.2 3h3l1.4 3.6-1.8 1.4a11 11 0 0 0 5.2 5.2l1.4-1.8L17 12.8v3a1.5 1.5 0 0 1-1.7 1.5A14 14 0 0 1 2.7 4.7 1.5 1.5 0 0 1 4.2 3z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
@@ -936,7 +991,7 @@ footer{border-top:1px solid var(--line);padding:var(--s5) 0 var(--s3)}
           <div><div class="c-k">ПОЧТА И МЕССЕНДЖЕРЫ</div><div class="c-v">zapis@garage60.ru<br>WhatsApp и Telegram — на тот же номер</div></div>
         </div>
       </div>
-      <div class="map"><span>Промзона на Поземского<br><b style="display:block;margin:10px 0 6px;font-size:19px">7 минут от Октябрьского проспекта</b>Ориентир — синие ворота<br>справа от шиномонтажа</span></div>
+      <div class="map"><span>Промзона на Поземского<br><b style="display:block;margin:10px 0 6px;font-size:var(--m4)">7 минут от Октябрьского проспекта</b>Ориентир — синие ворота<br>справа от шиномонтажа</span></div>
     </div>
   </div>
 </section>
@@ -955,7 +1010,7 @@ footer{border-top:1px solid var(--line);padding:var(--s5) 0 var(--s3)}
           </svg>
           <span><span class="logo-n">Гараж 60</span><span class="logo-s">автосервис · Псков</span></span>
         </a>
-        <p class="f-ab">Называем дату до начала работ и держим её. Смета фиксируется, доплат по ходу нет, снятые детали показываем.</p>
+        <p class="f-ab">Гараж на Поземского: подъёмники, сканер и мастера, которые объясняют, что делают с машиной.</p>
       </div>
       <div class="f-c">
         <h3>Разделы</h3>
@@ -969,12 +1024,13 @@ footer{border-top:1px solid var(--line);padding:var(--s5) 0 var(--s3)}
         <h3>Связаться</h3>
         <span>+7 (8112) 50-40-30</span>
         <span>zapis@garage60.ru</span>
-        <span>ул. Леона Поземского, 118к3</span>
+        <span>ул. Леона Поземского, 118к3</span>
         <span>Пн–Пт 9–20, Сб 10–17</span>
       </div>
     </div>
     <div class="f-bot">
-      <span>© 2026 ГАРАЖ 60. Автосервис в Пскове.</span>
+      <span>© 2026 · ГАРАЖ 60, автосервис в Пскове · ИП Фамилия И. О., ИНН 602700123456, ОГРНИП 304602733500123</span>
+      <span class="f-docs"><a href="policy.html">Политика обработки данных</a><a href="soglasie.html">Согласие на обработку данных</a></span>
       <span>Цены и сроки на сайте — ориентир, точные фиксируются в заказ-наряде.</span>
     </div>
   </div>
