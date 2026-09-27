@@ -1,0 +1,1250 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>МОМЕНТ — автосервис в Пскове · Скажем, когда заберёте машину</title>
+<meta name="description" content="Автосервис в Пскове. Называем срок до начала работ и держим его. Диагностика, ТО, ходовая, электрика. Смета фиксируется, доплат нет.">
+<meta name="theme-color" content="#17150F">
+<meta property="og:title" content="МОМЕНТ — автосервис в Пскове">
+<meta property="og:description" content="Скажем, когда заберёте машину. И вернём в этот срок.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alumni+Sans:wght@500;600;700;800;900&family=Martian+Mono:wght@400;500;600&family=Rubik:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════ токены ═══════════════ */
+:root{
+  --soot:#17150F;          /* тёплый графит вместо чёрного */
+  --soot-2:#221F17;
+  --soot-3:#2E2A20;
+  --bone:#EFEDE7;
+  --bone-2:#F7F6F2;
+  --white:#FFFFFF;
+  --steel:#979C94;
+  --line:#3A362B;
+  --line-lt:#DAD7CD;
+  --mark:#FFC400;          /* жёлтый дорожной разметки */
+  --mark-ink:#7A5B00;      /* тот же жёлтый, затемнён для текста на светлом */
+  --mark-soft:#FFF3CC;
+  --alert:#E5533D;
+
+  --r-s:4px; --r-m:10px; --r-l:16px;
+  --s1:8px; --s2:16px; --s3:24px; --s4:36px; --s5:56px; --s6:88px; --s7:124px;
+  --max:1240px;
+  --e:cubic-bezier(.2,.6,.35,1);
+  --sh:0 2px 6px rgba(23,21,15,.07), 0 20px 50px rgba(23,21,15,.1);
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--soot);color:var(--white);
+  font-family:Rubik,system-ui,-apple-system,"Segoe UI",sans-serif;
+  font-size:16.5px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+img{max-width:100%;display:block}
+a{color:inherit}
+button{font:inherit;color:inherit}
+h1,h2,h3{
+  font-family:"Alumni Sans",Impact,system-ui,sans-serif;margin:0;
+  font-weight:800;line-height:.92;letter-spacing:-.01em;text-transform:uppercase;
+}
+h1{font-size:clamp(52px,9.4vw,124px)}
+h2{font-size:clamp(38px,6.2vw,86px)}
+h3{font-size:clamp(21px,2.3vw,27px);line-height:1.06}
+p{margin:0}
+.mono{font-family:"Martian Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums;letter-spacing:-.04em}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 clamp(16px,4vw,36px)}
+:focus-visible{outline:3px solid var(--mark);outline-offset:3px;border-radius:3px}
+.skip{position:absolute;left:16px;top:-70px;z-index:90;background:var(--mark);color:var(--soot);padding:13px 20px;font-weight:600;text-decoration:none;transition:top .18s var(--e)}
+.skip:focus{top:12px}
+
+/* ═══════════════ шапка ═══════════════ */
+.top{position:sticky;top:0;z-index:70;background:rgba(23,21,15,.94);backdrop-filter:blur(12px) saturate(140%);border-bottom:1px solid var(--line)}
+.top-in{display:flex;align-items:center;gap:var(--s3);height:70px}
+.logo{display:flex;align-items:center;gap:11px;text-decoration:none;flex-shrink:0;padding:6px 0}
+.logo-m{width:36px;height:36px;flex-shrink:0}
+.logo-n{font-family:"Alumni Sans";font-weight:900;font-size:26px;letter-spacing:.02em;line-height:.9;display:block;text-transform:uppercase}
+.logo-s{font-family:"Martian Mono",monospace;font-size:8.5px;color:var(--steel);letter-spacing:.16em;text-transform:uppercase;display:block;margin-top:2px}
+.nav{display:flex;margin-left:auto;gap:0}
+.nav a{color:#C4C7BF;text-decoration:none;font-size:15px;padding:10px 13px;transition:color .16s var(--e)}
+.nav a:hover{color:var(--mark)}
+.top-r{display:flex;align-items:center;gap:14px;flex-shrink:0}
+.tel{font-family:"Martian Mono",monospace;font-size:13.5px;text-decoration:none;white-space:nowrap;padding:11px 0;display:flex;align-items:center;gap:8px}
+.tel:hover{color:var(--mark)}
+.burger{display:none;width:44px;height:44px;align-items:center;justify-content:center;background:var(--soot-3);border:0;cursor:pointer}
+
+/* ═══════════════ кнопки ═══════════════ */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:12px;min-height:54px;padding:0 26px;
+  font-weight:600;font-size:15.5px;text-decoration:none;cursor:pointer;border:1px solid transparent;
+  text-transform:uppercase;letter-spacing:.04em;
+  transition:background .2s var(--e),color .2s var(--e),border-color .2s var(--e),transform .16s var(--e);
+}
+.btn:active{transform:translateY(1px)}
+.btn svg{transition:transform .22s var(--e)}
+.btn:hover svg{transform:translateX(4px)}
+.btn-mark{background:var(--mark);color:var(--soot)}
+.btn-mark:hover{background:#FFD23F}
+.btn-line{background:transparent;color:var(--white);border-color:var(--line)}
+.btn-line:hover{border-color:var(--mark);color:var(--mark)}
+.btn-dark{background:var(--soot);color:var(--white)}
+.btn-dark:hover{background:var(--soot-3)}
+.btn-s{min-height:46px;padding:0 18px;font-size:14px}
+
+/* ═══════════════ герой ═══════════════ */
+.hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line);isolation:isolate}
+.hero-media{position:absolute;inset:-8% 0 -8% 0;z-index:0;overflow:hidden;will-change:transform;transform:translateY(var(--par,0))}
+.hero-media video,.hero-media img{
+  width:100%;height:100%;object-fit:cover;object-position:center 46%;
+  filter:grayscale(.05) contrast(1.22) brightness(1.28) saturate(1.18);
+}
+.hero-media img{position:absolute;inset:0}
+.hero-media video{position:absolute;inset:0;opacity:0;transition:opacity .8s var(--e)}
+.hero-media.playing video{opacity:1}
+.hero::after{
+  content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:
+    linear-gradient(100deg,var(--soot) 4%,rgba(23,21,15,.92) 30%,rgba(23,21,15,.42) 58%,rgba(23,21,15,.62) 100%),
+    linear-gradient(180deg,rgba(23,21,15,.82) 0%,transparent 18%,transparent 70%,var(--soot) 100%),
+    radial-gradient(720px 400px at 74% 36%,rgba(255,196,0,.1),transparent 66%);
+}
+.hero-in{position:relative;z-index:2;padding:clamp(44px,6vw,88px) 0 0;min-height:min(86vh,820px);display:flex;flex-direction:column;justify-content:center}
+.hero h1{max-width:none;font-size:clamp(46px,7.6vw,104px)}
+.hero h1 span{color:var(--mark);display:block}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);gap:clamp(24px,4vw,52px);align-items:center}
+.hero-lead{margin-top:26px;font-size:clamp(16.5px,1.5vw,18.5px);color:#B7BAB2;max-width:34ch}
+.hero-acts{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+.hero-shot{position:relative;margin:0;aspect-ratio:4/3.2;overflow:hidden;border:1px solid var(--line);background:var(--soot-2)}
+.hero-shot img{width:100%;height:100%;object-fit:cover;filter:contrast(1.06) saturate(.9)}
+.hero-shot::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 52%,rgba(23,21,15,.9) 100%)}
+.hero-shot figcaption{
+  position:absolute;left:14px;bottom:12px;z-index:2;font-size:10.5px;letter-spacing:.12em;
+  text-transform:uppercase;color:#D6D9D2;
+}
+.facts{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1px;margin-top:clamp(32px,4vw,52px);
+  background:var(--line);border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+}
+.fact{background:var(--soot);padding:24px 22px;display:flex;gap:16px;align-items:flex-start}
+.fact svg{flex-shrink:0;color:var(--mark);margin-top:2px}
+.fact b{font-family:"Alumni Sans";font-weight:800;font-size:34px;line-height:.9;display:block;text-transform:uppercase}
+.fact i{font-style:normal;font-size:13.5px;color:var(--steel);display:block;margin-top:6px;line-height:1.35}
+
+/* ═══════════════ секции ═══════════════ */
+.sec{padding:clamp(56px,7vw,var(--s7)) 0}
+.light{background:var(--bone);color:var(--soot)}
+.light .kicker{color:var(--mark-ink)}
+.light .sec-sub{color:#5F635C}
+.kicker{
+  font-family:"Martian Mono",monospace;font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--mark);display:flex;align-items:center;gap:14px;margin-bottom:18px;
+}
+.kicker::after{content:"";height:1px;width:52px;background:currentColor;opacity:.5}
+.sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:var(--s4);margin-bottom:clamp(30px,4vw,var(--s5));flex-wrap:wrap}
+.sec-head > div{max-width:22ch}
+.sec-sub{color:#A9ADA4;font-size:17px;max-width:46ch;margin-top:18px}
+
+/* ── услуги ── */
+.svc{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:var(--s2)}
+.card{
+  background:var(--soot-2);border:1px solid var(--line);display:flex;flex-direction:column;
+  transition:border-color .24s var(--e),transform .24s var(--e),background .24s var(--e);
+}
+.light .card{background:var(--white);border-color:var(--line-lt)}
+.card:hover{transform:translateY(-5px);border-color:var(--mark)}
+.card-shot{aspect-ratio:4/3;position:relative;overflow:hidden;background:#26231B}
+.card-shot img{width:100%;height:100%;object-fit:cover;filter:grayscale(.28) contrast(1.05) brightness(.86);transition:filter .35s var(--e),transform .5s var(--e)}
+.card:hover .card-shot img{filter:grayscale(0) contrast(1.05) brightness(1);transform:scale(1.05)}
+.card-shot::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(23,21,15,.42) 100%);pointer-events:none}
+.card-time{
+  position:absolute;top:12px;left:12px;z-index:2;background:var(--mark);color:var(--soot);
+  font-family:"Martian Mono",monospace;font-size:11px;font-weight:600;padding:6px 10px;letter-spacing:-.02em;
+}
+.card-b{padding:22px;display:flex;flex-direction:column;flex:1}
+.card-b h3{margin-bottom:11px}
+.card-b p{font-size:14.5px;color:#A9ADA4;flex:1}
+.light .card-b p{color:#5F635C}
+.card-price{
+  font-family:"Martian Mono",monospace;font-size:13px;color:var(--mark);
+  margin-top:18px;padding-top:16px;border-top:1px solid var(--line);
+}
+.light .card-price{color:var(--mark-ink);border-top-color:var(--line-lt)}
+
+/* ── доверие + форма ── */
+.shot-bg{position:relative;isolation:isolate}
+.shot-bg::before{
+  content:"";position:absolute;inset:0;z-index:-2;
+  background:url("img/svc-service.jpg") center/cover no-repeat;
+  filter:grayscale(.5) brightness(.34) contrast(1.1);
+}
+
+/* ── момент затяжки: 3D ── */
+.torque{background:var(--soot-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line);position:relative;overflow:clip}
+.torque-track{height:250vh;position:relative}
+.torque-pin{
+  position:sticky;top:70px;height:calc(100vh - 70px);min-height:520px;display:grid;
+  grid-template-columns:1fr 1fr;align-items:center;gap:clamp(20px,4vw,64px);
+  max-width:var(--max);margin:0 auto;padding:0 clamp(16px,4vw,36px);
+}
+.bolt-stage{perspective:1200px;display:grid;place-items:center;height:min(58vh,440px);position:relative}
+.bolt{position:relative;width:min(100%,300px);aspect-ratio:1;transform-style:preserve-3d;
+  transform:rotateX(52deg) rotateZ(calc(var(--p,0) * 320deg))}
+.bolt svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.b-shadow{transform:translateZ(-40px);filter:blur(26px);opacity:.55}
+.b-thread{transform:translateZ(-8px)}
+.b-head{transform:translateZ(18px)}
+.b-top{transform:translateZ(30px)}
+/* накидной ключ поворачивается вместе с болтом и щёлкает на 100% */
+.wrench{position:absolute;inset:0;transform-style:preserve-3d;transform:rotateX(52deg) rotateZ(calc(-24deg + var(--p,0) * 320deg))}
+.wrench svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible;transform:translateZ(46px)}
+.gauge{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(122%,368px);aspect-ratio:1;pointer-events:none}
+.gauge svg{width:100%;height:100%;overflow:visible}
+.gauge-track{stroke:rgba(255,255,255,.1)}
+.gauge-fill{stroke:var(--mark);stroke-dasharray:1;stroke-dashoffset:calc(1 - min(1, var(--p,0) * 1.06) * .75);
+  transition:stroke .3s var(--e)}
+.torque.done .gauge-fill{stroke:#7BE58B}
+.nm{position:absolute;left:50%;bottom:-6%;transform:translateX(-50%);text-align:center;white-space:nowrap}
+.nm b{font-family:"Alumni Sans";font-weight:900;font-size:clamp(40px,6vw,64px);line-height:.86;display:block;color:var(--mark);transition:color .3s var(--e)}
+.torque.done .nm b{color:#7BE58B}
+.nm i{font-style:normal;font-family:"Martian Mono",monospace;font-size:10px;letter-spacing:.18em;color:var(--steel);text-transform:uppercase}
+.tq-steps{position:relative}
+.tq-step{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;
+  opacity:0;transform:translateY(18px);transition:opacity .4s var(--e),transform .4s var(--e);pointer-events:none}
+.tq-step.on{opacity:1;transform:none;pointer-events:auto;position:relative}
+.tq-n{font-family:"Martian Mono",monospace;font-size:10.5px;letter-spacing:.16em;color:var(--mark);margin-bottom:16px;text-transform:uppercase}
+.tq-step h3{font-size:clamp(26px,3.6vw,44px);margin-bottom:16px}
+.tq-step p{color:#A9ADA4;font-size:16.5px;max-width:40ch}
+.tq-fact{margin-top:24px;padding:16px 18px;border:1px solid var(--line);background:rgba(255,196,0,.07);font-size:14.5px;color:#E6E2D6}
+.tq-bar{display:flex;gap:8px;margin-top:32px}
+.tq-bar button{flex:1;min-height:44px;background:none;border:0;cursor:pointer;display:flex;flex-direction:column;justify-content:flex-end;gap:9px;padding:0}
+.tq-bar b{font-family:"Martian Mono",monospace;font-size:10px;letter-spacing:.1em;color:rgba(255,255,255,.55);text-align:left;font-weight:400;transition:color .3s var(--e)}
+.tq-bar button[aria-current="true"] b{color:var(--mark)}
+.tq-bar button:hover b{color:#fff}
+.tq-bar span{display:block;height:2px;background:rgba(255,255,255,.16);position:relative;overflow:hidden}
+.tq-bar span::after{content:"";position:absolute;inset:0;background:var(--mark);transform:scaleX(0);transform-origin:left;transition:transform .4s var(--e)}
+.tq-bar button.done span::after{transform:scaleX(1)}
+@media (max-width:1024px){
+  .torque-pin{grid-template-columns:1fr;gap:20px;align-content:center}
+  .bolt-stage{height:min(34vh,280px)}
+  .torque-track{height:220vh}
+}
+@media (max-width:768px){
+  .torque-pin{min-height:0;height:auto;padding-top:24px;padding-bottom:24px}
+  .torque-track{height:200vh}
+}
+@media (prefers-reduced-motion:reduce){
+  .torque-track{height:auto}
+  .torque-pin{position:static;height:auto;min-height:0}
+  .tq-step{position:relative;opacity:1;transform:none;pointer-events:auto;margin-bottom:28px}
+}
+.shot-bg::after{
+  content:"";position:absolute;inset:0;z-index:-1;
+  background:linear-gradient(180deg,var(--soot) 0%,rgba(23,21,15,.86) 26%,rgba(23,21,15,.88) 74%,var(--soot) 100%);
+}
+.trust{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(28px,4vw,var(--s5));align-items:start}
+.pillars{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1px;background:var(--line);margin-top:var(--s4)}
+.pillar{background:var(--soot);padding:24px 20px}
+.pillar svg{color:var(--mark);margin-bottom:14px}
+.pillar h3{font-size:20px;margin-bottom:10px}
+.pillar p{font-size:14px;color:#A9ADA4}
+.form-box{background:var(--soot-2);border:1px solid var(--line);padding:clamp(24px,3vw,var(--s4))}
+.form-box h3{font-size:clamp(26px,3vw,34px);margin-bottom:10px}
+.form-box > p{color:#A9ADA4;font-size:15px;margin-bottom:var(--s3)}
+.fld{margin-bottom:var(--s2)}
+.fld label{display:block;font-size:13px;color:#A9ADA4;margin-bottom:8px;letter-spacing:.02em}
+.fld input,.fld select,.fld textarea{
+  width:100%;min-height:54px;padding:15px 16px;font:inherit;font-size:16px;color:var(--white);
+  background:var(--soot);border:1px solid var(--line);transition:border-color .16s var(--e);
+}
+.fld textarea{min-height:92px;resize:vertical}
+.fld input::placeholder,.fld textarea::placeholder{color:#8A8F87}
+.fld input:focus,.fld select:focus,.fld textarea:focus{border-color:var(--mark);outline:none}
+.fld select{appearance:none;background-image:linear-gradient(45deg,transparent 50%,var(--steel) 50%),linear-gradient(135deg,var(--steel) 50%,transparent 50%);background-position:calc(100% - 20px) 24px,calc(100% - 14px) 24px;background-size:6px 6px;background-repeat:no-repeat}
+.err{color:var(--alert);font-size:13px;margin-top:6px;display:none}
+.fld.bad input,.fld.bad select{border-color:var(--alert)}
+.fld.bad .err{display:block}
+.consent{display:flex;gap:12px;align-items:flex-start;font-size:13px;color:#8E938B;margin:var(--s2) 0;min-height:48px;padding:3px 0;cursor:pointer}
+.consent input{width:22px;height:22px;margin-top:1px;flex-shrink:0;accent-color:var(--mark)}
+.ok{display:none;margin-top:var(--s2);padding:15px;background:rgba(255,196,0,.12);border:1px solid rgba(255,196,0,.4);color:#FFE08A;font-size:14.5px}
+.ok.on{display:block}
+.safe{display:flex;gap:11px;align-items:flex-start;margin-top:var(--s2);font-size:12.5px;color:#92988F}
+.safe svg{flex-shrink:0;margin-top:1px}
+
+/* ── калькулятор простоя ── */
+.timer{display:grid;grid-template-columns:1.3fr .7fr;gap:var(--s2);align-items:start}
+.works{background:var(--white);border:1px solid var(--line-lt)}
+.works-h{display:grid;grid-template-columns:1fr 96px 84px;gap:12px;padding:14px 22px;background:var(--soot);color:var(--steel);font-family:"Martian Mono",monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase}
+.works-h span:nth-child(2),.works-h span:nth-child(3){text-align:right}
+.wrow{display:grid;grid-template-columns:1fr 96px 84px;gap:12px;align-items:center;padding:0 22px;border-bottom:1px solid var(--line-lt);transition:background .16s var(--e)}
+.wrow:last-child{border-bottom:0}
+.wrow:hover{background:var(--bone-2)}
+.wrow.on{background:var(--mark-soft)}
+.wrow label{display:flex;align-items:center;gap:13px;cursor:pointer;padding:15px 0;min-height:56px}
+.wrow input{position:absolute;opacity:0;width:0;height:0}
+.box{width:21px;height:21px;border:2px solid var(--line-lt);flex-shrink:0;display:grid;place-items:center;background:var(--white);transition:all .16s var(--e)}
+.box svg{opacity:0;transform:scale(.6);transition:all .16s var(--e)}
+.wrow input:checked + .box{background:var(--mark);border-color:var(--mark)}
+.wrow input:checked + .box svg{opacity:1;transform:scale(1)}
+.wrow input:focus-visible + .box{outline:3px solid var(--mark);outline-offset:2px}
+.wrow-n{font-size:15px;line-height:1.3}
+.wrow-t,.wrow-p{font-family:"Martian Mono",monospace;font-size:13px;text-align:right;color:#5F635C;white-space:nowrap}
+.wrow.on .wrow-t,.wrow.on .wrow-p{color:var(--soot);font-weight:500}
+.result{background:var(--soot);border:1px solid var(--line);padding:var(--s3);position:sticky;top:92px}
+.res-k{font-family:"Martian Mono",monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--steel)}
+.res-big{font-family:"Alumni Sans";font-weight:900;font-size:clamp(44px,6vw,68px);line-height:.86;color:var(--mark);margin:10px 0 4px;text-transform:uppercase}
+.res-sub{font-size:14px;color:#A9ADA4}
+.res-split{display:grid;gap:1px;background:var(--line);margin-top:var(--s3);border:1px solid var(--line)}
+.res-split div{background:var(--soot);padding:14px 16px;display:flex;justify-content:space-between;gap:12px;font-size:14px}
+.res-split b{font-family:"Martian Mono",monospace;font-weight:500}
+.res-note{font-size:12px;color:#92988F;line-height:1.5;margin-top:16px}
+.result .btn{width:100%;margin-top:18px}
+
+/* ── видео работы ── */
+.wv-frame{position:relative;margin:0;aspect-ratio:16/9;overflow:hidden;border:1px solid var(--line);background:var(--soot-2)}
+.wv-frame video{width:100%;height:100%;object-fit:cover;filter:contrast(1.06) saturate(.94) brightness(.92)}
+.wv-frame::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 60%,rgba(23,21,15,.85));pointer-events:none}
+.wv-frame figcaption{position:absolute;left:18px;bottom:16px;z-index:2;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#D6D9D2}
+.wv-play{
+  position:absolute;right:18px;bottom:14px;z-index:3;width:52px;height:52px;border:0;cursor:pointer;
+  background:var(--mark);color:var(--soot);display:grid;place-items:center;transition:background .2s var(--e),transform .2s var(--e);
+}
+.wv-play:hover{background:#FFD23F;transform:scale(1.06)}
+.wv-frame.playing .wv-play svg{display:none}
+.wv-frame.playing .wv-play::after{content:"";width:14px;height:16px;border-left:4px solid currentColor;border-right:4px solid currentColor}
+
+/* ── процесс ── */
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(216px,1fr));gap:1px;background:var(--line-lt)}
+.step{background:var(--bone);padding:26px 22px;position:relative}
+.step-t{font-family:"Martian Mono",monospace;font-size:11px;color:var(--mark-ink);letter-spacing:.1em;margin-bottom:14px}
+.step h3{font-size:21px;margin-bottom:10px}
+.step p{font-size:14.5px;color:#5F635C}
+
+/* ── отзывы ── */
+.revs{display:grid;grid-template-columns:auto 1fr;gap:var(--s3);align-items:center;background:var(--soot-2);border:1px solid var(--line);padding:clamp(22px,3vw,var(--s4))}
+.score{text-align:center;padding-right:var(--s3);border-right:1px solid var(--line)}
+.score b{font-family:"Alumni Sans";font-weight:900;font-size:64px;line-height:.85;display:block}
+.stars{display:flex;gap:3px;justify-content:center;color:var(--mark);margin:10px 0 8px}
+.score i{font-style:normal;font-size:12px;color:var(--steel);font-family:"Martian Mono",monospace}
+.rev-list{display:grid;gap:var(--s2)}
+.rev{font-size:15.5px;line-height:1.55}
+.rev cite{display:block;font-style:normal;font-size:13px;color:var(--steel);margin-top:8px;font-family:"Martian Mono",monospace}
+
+/* ── прайс ── */
+.price{background:var(--white);border:1px solid var(--line-lt);overflow-x:auto}
+.price table{width:100%;border-collapse:collapse;min-width:520px}
+.price th{text-align:left;padding:16px 22px;background:var(--soot);color:var(--white);font-family:"Alumni Sans";font-weight:700;font-size:19px;text-transform:uppercase;letter-spacing:.02em}
+.price th:not(:first-child){text-align:right}
+.price td{padding:15px 22px;border-bottom:1px solid var(--line-lt);font-size:15px}
+.price td:not(:first-child){text-align:right;font-family:"Martian Mono",monospace;font-size:13.5px;white-space:nowrap}
+.price tr:last-child td{border-bottom:0}
+.price tbody tr:hover{background:var(--bone-2)}
+
+/* ── faq ── */
+.faq{max-width:860px}
+.q{border-bottom:1px solid var(--line);margin:0}
+.q summary{cursor:pointer;list-style:none;padding:22px 0;font-family:"Alumni Sans";font-weight:700;font-size:clamp(20px,2.2vw,26px);text-transform:uppercase;display:flex;justify-content:space-between;gap:20px;align-items:center;min-height:58px;transition:color .18s var(--e)}
+.q summary::-webkit-details-marker{display:none}
+.q summary:hover{color:var(--mark)}
+.q summary::after{content:"+";font-family:"Martian Mono",monospace;font-size:22px;color:var(--mark);flex-shrink:0;transition:transform .24s var(--e)}
+.q[open] summary::after{transform:rotate(45deg)}
+.q-a{padding:0 0 24px;color:#A9ADA4;font-size:15.5px;max-width:70ch}
+
+/* ── контакты ── */
+.contacts{display:grid;grid-template-columns:.9fr 1.1fr;gap:var(--s2)}
+.c-card{background:var(--soot-2);border:1px solid var(--line);padding:var(--s3)}
+.c-row{display:flex;gap:14px;padding:15px 0;border-bottom:1px solid var(--line);align-items:flex-start}
+.c-row:last-child{border-bottom:0}
+.c-row svg{flex-shrink:0;color:var(--mark);margin-top:2px}
+.c-k{font-size:12px;color:var(--steel);font-family:"Martian Mono",monospace;letter-spacing:.06em}
+.c-v{font-size:16px;margin-top:4px}
+.c-v a{text-decoration:none;display:inline-block;padding:10px 0;margin:-10px 0}
+.c-v a:hover{color:var(--mark)}
+.map{background:linear-gradient(150deg,#26231B,#312D22);border:1px solid var(--line);display:grid;place-items:center;min-height:280px;position:relative}
+.map::after{content:"";position:absolute;inset:0;background-image:repeating-linear-gradient(0deg,rgba(255,255,255,.03) 0 1px,transparent 1px 40px),repeating-linear-gradient(90deg,rgba(255,255,255,.03) 0 1px,transparent 1px 40px)}
+.map span{position:relative;z-index:1;font-family:"Martian Mono",monospace;font-size:11px;color:var(--steel);text-align:center;line-height:2;padding:0 20px}
+
+/* ── незаполненное ── */
+.todo{color:#9BA097;border-bottom:1px dashed var(--mark);background:rgba(255,196,0,.09);padding:1px 6px}
+a.todo{display:inline-block;padding:11px 6px;margin:-11px 0}
+.light .todo{color:#5F635C}
+
+/* ── футер ── */
+footer{border-top:1px solid var(--line);padding:var(--s5) 0 var(--s3)}
+.f-top{display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:var(--s4);padding-bottom:var(--s4);border-bottom:1px solid var(--line)}
+.f-c h4{font-family:"Alumni Sans";font-weight:700;font-size:19px;text-transform:uppercase;margin-bottom:16px}
+.f-c a,.f-c span.todo{display:block;color:#A9ADA4;text-decoration:none;padding:10px 0;font-size:15px}
+.f-c a:hover{color:var(--mark)}
+.f-ab{font-size:14.5px;color:#8E938B;margin-top:16px;max-width:34em;line-height:1.6}
+.f-bot{display:flex;justify-content:space-between;gap:var(--s2);flex-wrap:wrap;padding-top:var(--s3);font-size:12.5px;color:#92988F}
+
+.rise{opacity:0}
+/* ═══════════════ адаптив ═══════════════ */
+@media (max-width:1100px){ .tel span{display:none} .nav a{padding:10px 10px;font-size:14px} }
+@media (max-width:1024px){
+  .hero-grid{grid-template-columns:1fr}
+  .trust,.timer,.contacts{grid-template-columns:1fr}
+  .result{position:static}
+  .f-top{grid-template-columns:1fr 1fr}
+}
+@media (max-width:940px){
+  .nav{display:none;position:absolute;top:70px;left:0;right:0;background:var(--soot);flex-direction:column;padding:10px 16px 18px;border-bottom:1px solid var(--line)}
+  .nav.open{display:flex}
+  .nav a{padding:14px 12px;font-size:16px}
+  .burger{display:flex}
+}
+@media (max-width:768px){
+  .top-r .btn{display:none}
+  .f-top{grid-template-columns:1fr;gap:var(--s3)}
+  .revs{grid-template-columns:1fr}
+  .score{border-right:0;border-bottom:1px solid var(--line);padding:0 0 var(--s3)}
+}
+@media (max-width:560px){
+  .works-h{grid-template-columns:1fr 84px}
+  .works-h span:last-child{display:none}
+  .wrow{grid-template-columns:1fr 84px}
+  .wrow-p{grid-column:1 / -1;text-align:left;padding-bottom:12px}
+}
+@media (prefers-reduced-motion:reduce){ html{scroll-behavior:auto} .rise{opacity:1} }
+@media print{.top{display:none}}
+</style>
+<noscript><style>.rise{opacity:1}</style></noscript>
+</head>
+<body>
+<a href="#main" class="skip">Перейти к содержанию</a>
+
+<!-- ═══════ шапка ═══════ -->
+<header class="top">
+  <div class="wrap top-in">
+    <a href="#" class="logo" aria-label="МОМЕНТ — на главную">
+      <svg class="logo-m" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+        <rect x="1.5" y="1.5" width="37" height="37" stroke="#FFC400" stroke-width="2.5"/>
+        <path d="M11 28V12l9 11 9-11v16" stroke="#fff" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+      </svg>
+      <span>
+        <span class="logo-n">Момент</span>
+        <span class="logo-s">автосервис · Псков</span>
+      </span>
+    </a>
+    <nav class="nav" id="nav">
+      <a href="#svc">Услуги</a>
+      <a href="#torque">Момент</a>
+      <a href="#calc">Сроки</a>
+      <a href="#price">Цены</a>
+      <a href="#how">Как работаем</a>
+      <a href="#faq">Вопросы</a>
+      <a href="#contacts">Контакты</a>
+    </nav>
+    <div class="top-r">
+      <span class="tel todo" aria-label="телефон">
+        <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.2 2h2.4l1.1 2.9-1.5 1.1a9 9 0 0 0 4.3 4.3l1.1-1.5 2.9 1.1v2.4a1.2 1.2 0 0 1-1.3 1.2A11.5 11.5 0 0 1 2 3.3 1.2 1.2 0 0 1 3.2 2z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+        <span>+7 ___ ___-__-__</span>
+      </span>
+      <a class="btn btn-mark btn-s" href="#book">Записаться</a>
+      <button class="burger" id="burger" aria-label="Меню" aria-expanded="false" aria-controls="nav">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M2 5h16M2 10h16M2 15h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ═══════ герой ═══════ -->
+<section class="hero">
+  <div class="hero-media" id="heroMedia" aria-hidden="true">
+    <img src="video/hero-oil-poster.jpg" alt="" width="1280" height="720">
+    <video muted loop playsinline preload="none" poster="video/hero-oil-poster.jpg">
+      <source src="video/hero-oil.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="wrap hero-in">
+    <div class="hero-grid">
+      <div>
+        <div class="kicker">автосервис в Пскове</div>
+        <h1>Скажем, когда<br><span>заберёте машину</span></h1>
+        <p class="hero-lead">
+          Называем дату до начала работ и держим её. Если поставщик подвёл —
+          узнаете в тот же день, а не когда приедете забирать.
+        </p>
+        <div class="hero-acts">
+          <a class="btn btn-mark" href="#book">
+            Записаться
+            <svg width="17" height="14" viewBox="0 0 18 14" fill="none" aria-hidden="true"><path d="M1 7h15M11 2l5 5-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a class="btn btn-line" href="#calc">
+            Узнать срок
+            <svg width="17" height="14" viewBox="0 0 18 14" fill="none" aria-hidden="true"><path d="M1 7h15M11 2l5 5-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </div>
+      <figure class="hero-shot">
+        <img src="img/svc-diag.jpg" alt="Механик осматривает автомобиль на подъёмнике" loading="eager" width="800" height="550">
+        <figcaption class="mono">приёмка · осмотр на подъёмнике</figcaption>
+      </figure>
+    </div>
+
+    <div class="facts">
+      <div class="fact">
+        <svg width="26" height="26" viewBox="0 0 26 26" fill="none" aria-hidden="true"><circle cx="13" cy="13" r="11" stroke="currentColor" stroke-width="2"/><path d="M13 6.5V13l4.5 3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        <span><b class="todo">__ %</b><i>работ сдано в названный срок<br>[ЗАПОЛНИТЬ статистику]</i></span>
+      </div>
+      <div class="fact">
+        <svg width="26" height="26" viewBox="0 0 26 26" fill="none" aria-hidden="true"><path d="M13 3l9 4v6.5c0 5.4-3.6 9.6-9 11.5-5.4-1.9-9-6.1-9-11.5V7l9-4z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M9.5 13.5l2.5 2.5 5-5.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span><b class="todo">__ года</b><i>гарантия на работы<br>[ЗАПОЛНИТЬ]</i></span>
+      </div>
+      <div class="fact">
+        <svg width="26" height="26" viewBox="0 0 26 26" fill="none" aria-hidden="true"><rect x="3" y="6" width="20" height="14" stroke="currentColor" stroke-width="2"/><path d="M3 11h20" stroke="currentColor" stroke-width="2"/></svg>
+        <span><b>±0&nbsp;₽</b><i>смета не растёт<br>после начала работ</i></span>
+      </div>
+      <div class="fact">
+        <svg width="26" height="26" viewBox="0 0 26 26" fill="none" aria-hidden="true"><path d="M3 13h4l3-7 6 14 3-7h4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span><b class="todo">__ мин</b><i>диагностика по записи<br>[ЗАПОЛНИТЬ]</i></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ услуги ═══════ -->
+<section class="sec light" id="svc">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <div class="kicker">услуги</div>
+        <h2>Что делаем</h2>
+      </div>
+      <p class="sec-sub">Под каждой работой — сколько машина простоит у нас. Не «приезжайте, посмотрим», а конкретные часы.</p>
+    </div>
+    <div class="svc">
+
+      <article class="card rise">
+        <div class="card-shot"><span class="card-time mono">40 мин</span><img src="img/svc-diag.jpg" alt="Диагностический сканер подключён к автомобилю" loading="lazy" width="800" height="600"></div>
+        <div class="card-b">
+          <h3>Диагностика</h3>
+          <p>Чтение ошибок по всем блокам и осмотр на подъёмнике. Отдаём письменную карту: что критично, что подождёт.</p>
+          <div class="card-price mono">от <span class="todo">[ЗАПОЛНИТЬ]</span></div>
+        </div>
+      </article>
+
+      <article class="card rise">
+        <div class="card-shot"><span class="card-time mono">1,5 ч</span><img src="img/svc-service.jpg" alt="Цех автосервиса с инструментом и подъёмником" loading="lazy" width="800" height="600"></div>
+        <div class="card-b">
+          <h3>Техобслуживание</h3>
+          <p>Масло, фильтры, свечи, тормозная жидкость. Показываем снятое, чтобы вы видели, что меняли на самом деле.</p>
+          <div class="card-price mono">от <span class="todo">[ЗАПОЛНИТЬ]</span></div>
+        </div>
+      </article>
+
+      <article class="card rise">
+        <div class="card-shot"><span class="card-time mono">3–5 ч</span><img src="img/svc-chassis.jpg" alt="Автомобили на подъёмниках в ремонтной зоне" loading="lazy" width="800" height="600"></div>
+        <div class="card-b">
+          <h3>Ходовая</h3>
+          <p>Стойки, сайлентблоки, рычаги, тормоза. После — развал-схождение на стенде, чтобы руль стоял ровно.</p>
+          <div class="card-price mono">от <span class="todo">[ЗАПОЛНИТЬ]</span></div>
+        </div>
+      </article>
+
+      <article class="card rise">
+        <div class="card-shot"><span class="card-time mono">от 2 ч</span><img src="img/svc-electro.jpg" alt="Стена с инструментом в мастерской" loading="lazy" width="800" height="600"></div>
+        <div class="card-b">
+          <h3>Электрика</h3>
+          <p>Утечки тока, стартер, генератор, проводка. Ищем причину, а не меняем узлы по очереди за ваш счёт.</p>
+          <div class="card-price mono">от <span class="todo">[ЗАПОЛНИТЬ]</span></div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ доверие + форма ═══════ -->
+<section class="sec shot-bg" id="book">
+  <div class="wrap trust">
+    <div>
+      <div class="kicker">почему к нам</div>
+      <h2>Сервис,<br>который держит слово</h2>
+      <p class="sec-sub">В автосервисе злит не цена, а неизвестность: сколько ждать, во сколько выльется, что вообще делали с машиной. Мы закрыли три этих вопроса правилами.</p>
+      <div class="pillars">
+        <div class="pillar">
+          <svg width="26" height="26" viewBox="0 0 26 26" fill="none" aria-hidden="true"><rect x="4" y="3" width="18" height="20" stroke="currentColor" stroke-width="2"/><path d="M8 9h10M8 13.5h10M8 18h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          <h3>Смета до ключей</h3>
+          <p>Перечень работ и сумма на бумаге, ваш экземпляр — до того, как мы возьмём машину.</p>
+        </div>
+        <div class="pillar">
+          <svg width="26" height="26" viewBox="0 0 26 26" fill="none" aria-hidden="true"><circle cx="13" cy="13" r="10" stroke="currentColor" stroke-width="2"/><path d="M13 7v6l4 2.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          <h3>Срок с датой</h3>
+          <p>Не «на неделе», а конкретный день. Сдвиг — звоним сразу, не ждём вашего приезда.</p>
+        </div>
+        <div class="pillar">
+          <svg width="26" height="26" viewBox="0 0 26 26" fill="none" aria-hidden="true"><rect x="3" y="6" width="20" height="15" stroke="currentColor" stroke-width="2"/><circle cx="13" cy="13.5" r="4" stroke="currentColor" stroke-width="2"/><path d="M9 6l1.6-2.5h4.8L17 6" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+          <h3>Фото по этапам</h3>
+          <p>Снимаем узел до, после разборки и после сборки. Снятые детали отдаём или показываем.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- [ЗАПОЛНИТЬ] action обработчика заявок -->
+    <form class="form-box rise" id="bookForm" novalidate>
+      <h3>Запись на сервис</h3>
+      <p>Перезвоним в рабочее время и назовём дату, когда сможем взять машину.</p>
+      <div class="fld">
+        <label for="fName">Имя</label>
+        <input id="fName" type="text" autocomplete="name" placeholder="Как к вам обращаться">
+        <div class="err">Напишите имя — так проще разговаривать</div>
+      </div>
+      <div class="fld">
+        <label for="fTel">Телефон</label>
+        <input id="fTel" type="tel" inputmode="tel" autocomplete="tel" placeholder="+7 ___ ___-__-__">
+        <div class="err">Нужен номер, чтобы перезвонить</div>
+      </div>
+      <div class="fld">
+        <label for="fCar">Машина</label>
+        <input id="fCar" type="text" placeholder="Марка, модель, год">
+      </div>
+      <div class="fld">
+        <label for="fWhat">С чем приедете</label>
+        <select id="fWhat">
+          <option value="">Выберите</option>
+          <option>Диагностика — что-то не так, но непонятно что</option>
+          <option>Плановое ТО</option>
+          <option>Ходовая, тормоза, развал</option>
+          <option>Электрика</option>
+          <option>Двигатель или трансмиссия</option>
+          <option>Другое</option>
+        </select>
+        <div class="err">Выберите — так подберём мастера и время</div>
+      </div>
+      <label class="consent">
+        <input type="checkbox" id="fOk">
+        <span>Согласен на обработку персональных данных по <a href="#" class="todo">политике [ЗАПОЛНИТЬ]</a>. Номер нужен только для записи.</span>
+      </label>
+      <button type="submit" class="btn btn-mark" style="width:100%">
+        Оставить заявку
+        <svg width="17" height="14" viewBox="0 0 18 14" fill="none" aria-hidden="true"><path d="M1 7h15M11 2l5 5-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="ok" id="okMsg">Записали. Перезвоним и назовём дату.</div>
+      <div class="safe">
+        <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3" y="7" width="10" height="7" stroke="currentColor" stroke-width="1.6"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.6"/></svg>
+        <span>Данные не передаём третьим лицам и не используем для рассылок.</span>
+      </div>
+    </form>
+  </div>
+</section>
+
+
+<!-- ═══════ момент затяжки ═══════ -->
+<section class="torque" id="torque">
+  <div class="torque-track" id="tqTrack">
+    <div class="torque-pin">
+      <div class="bolt-stage">
+        <div class="bolt" id="bolt">
+          <svg class="b-shadow" viewBox="0 0 200 200" aria-hidden="true">
+            <circle cx="100" cy="100" r="66" fill="#FFC400"/>
+          </svg>
+          <svg class="b-thread" viewBox="0 0 200 200" aria-hidden="true">
+            <circle cx="100" cy="100" r="46" fill="#4A443A"/>
+            <circle cx="100" cy="100" r="46" fill="none" stroke="#2A251D" stroke-width="2"/>
+          </svg>
+          <svg class="b-head" viewBox="0 0 200 200" aria-hidden="true">
+            <defs>
+              <linearGradient id="gSteel" x1=".2" y1="0" x2=".85" y2="1">
+                <stop offset="0" stop-color="#9AA0A6"/>
+                <stop offset=".42" stop-color="#6E747A"/>
+                <stop offset="1" stop-color="#3D4247"/>
+              </linearGradient>
+              <linearGradient id="gTop" x1=".3" y1="0" x2=".8" y2="1">
+                <stop offset="0" stop-color="#C3C8CD"/>
+                <stop offset=".5" stop-color="#878D93"/>
+                <stop offset="1" stop-color="#5A6066"/>
+              </linearGradient>
+            </defs>
+            <path d="M100 34 158 67 158 133 100 166 42 133 42 67Z" fill="url(#gSteel)" stroke="#2E3338" stroke-width="2.5" stroke-linejoin="round"/>
+          </svg>
+          <svg class="b-top" viewBox="0 0 200 200" aria-hidden="true">
+            <path d="M100 44 149 72 149 128 100 156 51 128 51 72Z" fill="url(#gTop)" stroke="#4B5157" stroke-width="2" stroke-linejoin="round"/>
+            <circle cx="100" cy="100" r="17" fill="#4E545A" stroke="#33383D" stroke-width="2"/>
+            <path d="M100 60c-14 4-24 14-27 27" stroke="#E4E8EB" stroke-width="3" fill="none" stroke-linecap="round" opacity=".5"/>
+          </svg>
+        </div>
+
+        <div class="wrench" id="wrench" aria-hidden="true">
+          <svg viewBox="0 0 200 200">
+            <defs>
+              <linearGradient id="gWr" x1=".2" y1="0" x2=".8" y2="1">
+                <stop offset="0" stop-color="#D8DCE0"/><stop offset=".5" stop-color="#A2A8AE"/><stop offset="1" stop-color="#71777D"/>
+              </linearGradient>
+              <linearGradient id="gGrip" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#FFD23F"/><stop offset="1" stop-color="#D9A600"/>
+              </linearGradient>
+            </defs>
+            <!-- рукоятка -->
+            <rect x="92" y="-96" width="17" height="104" rx="4" fill="url(#gGrip)" stroke="#B08600" stroke-width="1.6"/>
+            <rect x="94" y="-88" width="13" height="6" rx="2" fill="#B08600" opacity=".5"/>
+            <rect x="94" y="-74" width="13" height="6" rx="2" fill="#B08600" opacity=".5"/>
+            <rect x="94" y="-60" width="13" height="6" rx="2" fill="#B08600" opacity=".5"/>
+            <!-- шейка -->
+            <rect x="94" y="4" width="13" height="34" rx="3" fill="url(#gWr)" stroke="#6B7177" stroke-width="1.4"/>
+            <!-- кольцевая головка поверх болта -->
+            <path d="M100 26a46 46 0 1 1 0 92 46 46 0 0 1 0-92zm0 15a31 31 0 1 0 0 62 31 31 0 0 0 0-62z"
+                  fill="url(#gWr)" stroke="#6B7177" stroke-width="1.8"/>
+            <path d="M74 44a34 34 0 0 1 20-12" stroke="#F1F4F6" stroke-width="3.4" fill="none" stroke-linecap="round" opacity=".65"/>
+          </svg>
+        </div>
+
+        <div class="gauge" aria-hidden="true">
+          <svg viewBox="0 0 200 200">
+            <circle class="gauge-track" cx="100" cy="100" r="88" fill="none" stroke-width="3"
+                    pathLength="1" stroke-dasharray=".75 .25" transform="rotate(135 100 100)" stroke-linecap="round"/>
+            <circle class="gauge-fill" cx="100" cy="100" r="88" fill="none" stroke-width="3"
+                    pathLength="1" stroke-dasharray=".75 .25" transform="rotate(135 100 100)" stroke-linecap="round"/>
+          </svg>
+        </div>
+
+        <div class="nm">
+          <b class="mono" id="nmValue" aria-live="polite">0</b>
+          <i>Н·м · момент затяжки</i>
+        </div>
+      </div>
+
+      <div class="tq-steps" id="tqSteps">
+        <div class="tq-step on">
+          <div class="tq-n">01 · от руки</div>
+          <h3>«Затянули как надо» — это не цифра</h3>
+          <p>Колёсный болт, затянутый на глаз, откручивается сам или срывает резьбу. Разница между «нормально» и «правильно» — измеримая величина.</p>
+          <div class="tq-fact">Недотяг на 30 Н·м — и через 200 км болт ослаб.</div>
+        </div>
+        <div class="tq-step">
+          <div class="tq-n">02 · по нормативу</div>
+          <h3>У каждого соединения свой момент</h3>
+          <p>Колёсный болт — 110 Н·м, свеча зажигания — 25, сливная пробка — 35. Это цифры производителя, а не привычка мастера.</p>
+          <div class="tq-fact">Динамометрический ключ щёлкает ровно на нужном значении.</div>
+        </div>
+        <div class="tq-step">
+          <div class="tq-n">03 · щелчок</div>
+          <h3>110 Н·м. Точка</h3>
+          <p>Ключ щёлкнул — соединение затянуто по нормативу. Ни больше, ни меньше. То же самое мы делаем со сроками: называем цифру и попадаем в неё.</p>
+          <div class="tq-fact">Отсюда и название сервиса.</div>
+        </div>
+        <div class="tq-bar" id="tqBar" role="tablist" aria-label="Стадии затяжки">
+          <button type="button" data-i="0" aria-current="true" class="done"><b>01 ОТ РУКИ</b><span></span></button>
+          <button type="button" data-i="1"><b>02 НОРМАТИВ</b><span></span></button>
+          <button type="button" data-i="2"><b>03 ЩЕЛЧОК</b><span></span></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ калькулятор простоя ═══════ -->
+<section class="sec light" id="calc">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <div class="kicker">сроки</div>
+        <h2>Сколько<br>машина простоит</h2>
+      </div>
+      <p class="sec-sub">Отметьте работы — увидите, сколько часов машина будет у нас и в какой день её можно забрать. Считаем по нормативам, а не на глаз.</p>
+    </div>
+
+    <div class="timer">
+      <div class="works">
+        <div class="works-h"><span>Работа</span><span>Время</span><span>Цена</span></div>
+        <div id="rows"></div>
+      </div>
+      <aside class="result">
+        <div class="res-k">Машина будет готова</div>
+        <div class="res-big mono" id="resDay" aria-live="polite">—</div>
+        <div class="res-sub" id="resSub">Отметьте работы слева</div>
+        <div class="res-split">
+          <div><span>Работ в цеху</span><b class="mono" id="resHours">0 ч</b></div>
+          <div><span>Выбрано</span><b class="mono" id="resCount">—</b></div>
+          <div><span>Стоимость</span><b class="mono todo">[ЗАПОЛНИТЬ]</b></div>
+        </div>
+        <p class="res-note">Расчёт по нормативам времени. Точную дату называет мастер после осмотра — она фиксируется в заказ-наряде и не сдвигается без предупреждения.</p>
+        <a class="btn btn-mark" href="#book" id="calcGo">Записаться на эти работы</a>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ видео работы ═══════ -->
+<section class="sec workvid">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <div class="kicker">как это выглядит</div>
+        <h2>Работа,<br>а не обещания</h2>
+      </div>
+      <p class="sec-sub">Снимаем процесс, чтобы вы видели, что происходит с машиной, пока она у нас. Ролики отправляем в мессенджер по ходу ремонта.</p>
+    </div>
+    <figure class="wv-frame rise">
+      <video muted loop playsinline preload="none" poster="video/work-lift-poster.jpg" id="workVideo">
+        <source src="video/work-lift.mp4" type="video/mp4">
+      </video>
+      <figcaption class="mono">осмотр ходовой на подъёмнике</figcaption>
+      <button type="button" class="wv-play" id="wvPlay" aria-label="Включить видео">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8 5l12 7-12 7V5z" fill="currentColor"/></svg>
+      </button>
+    </figure>
+  </div>
+</section>
+
+<!-- ═══════ процесс ═══════ -->
+<section class="sec" id="how">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <div class="kicker">как проходит ремонт</div>
+        <h2>Четыре шага</h2>
+      </div>
+      <p class="sec-sub">Порядок один для всех работ — от замены масла до перебора подвески.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-t mono">ШАГ 01 · 20 минут</div>
+        <h3>Приёмка</h3>
+        <p>Осматриваем машину вместе с вами, фиксируем пробег и видимые дефекты. Вы говорите симптомы своими словами.</p>
+      </div>
+      <div class="step">
+        <div class="step-t mono">ШАГ 02 · 40 минут</div>
+        <h3>Дефектовка</h3>
+        <p>Сканер и подъёмник. Пишем карту: что критично, что подождёт, что в норме. Карту отдаём на руки.</p>
+      </div>
+      <div class="step">
+        <div class="step-t mono">ШАГ 03 · согласование</div>
+        <h3>Смета и дата</h3>
+        <p>Называем сумму и день выдачи. Пока вы не согласились — работы не идут и деньги не берутся.</p>
+      </div>
+      <div class="step">
+        <div class="step-t mono">ШАГ 04 · по смете</div>
+        <h3>Ремонт и выдача</h3>
+        <p>Фотоотчёт по этапам, снятые детали показываем. При выдаче — акт, чек и гарантийный талон.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ отзывы ═══════ -->
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <div class="kicker">отзывы</div>
+        <h2>Что говорят</h2>
+      </div>
+    </div>
+    <div class="revs rise">
+      <div class="score">
+        <b class="todo">_,_</b>
+        <div class="stars" aria-hidden="true">
+          <svg width="15" height="15" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1l2 4.2 4.5.6-3.3 3.2.8 4.5L8 11.4 4 13.5l.8-4.5L1.5 5.8 6 5.2 8 1z"/></svg>
+          <svg width="15" height="15" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1l2 4.2 4.5.6-3.3 3.2.8 4.5L8 11.4 4 13.5l.8-4.5L1.5 5.8 6 5.2 8 1z"/></svg>
+          <svg width="15" height="15" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1l2 4.2 4.5.6-3.3 3.2.8 4.5L8 11.4 4 13.5l.8-4.5L1.5 5.8 6 5.2 8 1z"/></svg>
+          <svg width="15" height="15" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1l2 4.2 4.5.6-3.3 3.2.8 4.5L8 11.4 4 13.5l.8-4.5L1.5 5.8 6 5.2 8 1z"/></svg>
+          <svg width="15" height="15" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1l2 4.2 4.5.6-3.3 3.2.8 4.5L8 11.4 4 13.5l.8-4.5L1.5 5.8 6 5.2 8 1z"/></svg>
+        </div>
+        <i class="todo">на основе __ отзывов</i>
+      </div>
+      <div class="rev-list">
+        <blockquote class="rev">
+          <span class="todo">[ЗАПОЛНИТЬ] Отзыв с Яндекс.Карт или 2ГИС — брать дословно, с согласия автора либо через официальный виджет.</span>
+          <cite class="todo">— имя, марка авто</cite>
+        </blockquote>
+        <blockquote class="rev">
+          <span class="todo">[ЗАПОЛНИТЬ] Второй отзыв. Сильнее работают те, где названа сумма или срок: «сказали четверг — отдали в четверг».</span>
+          <cite class="todo">— имя, марка авто</cite>
+        </blockquote>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ прайс ═══════ -->
+<section class="sec light" id="price">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <div class="kicker">прайс</div>
+        <h2>Цены и сроки</h2>
+      </div>
+      <p class="sec-sub">Цена за законченную работу, вместе с расходниками. Запчасти считаются отдельно — можно привезти свои.</p>
+    </div>
+    <div class="price rise">
+      <table>
+        <thead><tr><th>Работа</th><th>Время</th><th>Цена</th></tr></thead>
+        <tbody id="priceRows"></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ faq ═══════ -->
+<section class="sec" id="faq">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <div class="kicker">вопросы</div>
+        <h2>Спрашивают<br>до записи</h2>
+      </div>
+    </div>
+    <div class="faq">
+      <details class="q"><summary>Можно привезти свои запчасти?</summary><div class="q-a">Да, тогда платите только за работу. Гарантия в этом случае распространяется на работу — на саму деталь её даёт продавец. Если увидим брак, скажем до установки.</div></details>
+      <details class="q"><summary>А если по ходу найдётся что-то ещё?</summary><div class="q-a">Останавливаемся и звоним. Присылаем фото и новую сумму. Пока не согласовали — работа стоит, деньги за простой не берём. Можете забрать машину, оплатив только согласованное.</div></details>
+      <details class="q"><summary>Что если не уложитесь в срок?</summary><div class="q-a">Предупреждаем в тот же день, когда стало понятно, — обычно это задержка поставщика запчастей. Не ставим перед фактом при выдаче.</div></details>
+      <details class="q"><summary>Даёте документы?</summary><div class="q-a">Заказ-наряд с перечнем работ и суммой — до начала. Акт, чек и гарантийный талон — при выдаче.</div></details>
+      <details class="q"><summary>Работаете с юрлицами?</summary><div class="q-a">Да, по договору с отсрочкой и закрывающими документами. Для автопарков условия обсуждаются отдельно.</div></details>
+      <details class="q"><summary>Есть ли эвакуатор?</summary><div class="q-a"><span class="todo">[ЗАПОЛНИТЬ] Уточнить у клиента: есть ли свой эвакуатор, партнёрский, и на каких условиях.</span></div></details>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ контакты ═══════ -->
+<section class="sec" id="contacts">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <div class="kicker">контакты</div>
+        <h2>Где нас найти</h2>
+      </div>
+    </div>
+    <div class="contacts">
+      <div class="c-card rise">
+        <div class="c-row">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M10 18s6.5-5.2 6.5-10a6.5 6.5 0 1 0-13 0c0 4.8 6.5 10 6.5 10z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="10" cy="8" r="2.4" stroke="currentColor" stroke-width="1.8"/></svg>
+          <div><div class="c-k">АДРЕС</div><div class="c-v"><span class="todo">[ЗАПОЛНИТЬ]</span></div></div>
+        </div>
+        <div class="c-row">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4.2 3h3l1.4 3.6-1.8 1.4a11 11 0 0 0 5.2 5.2l1.4-1.8L17 12.8v3a1.5 1.5 0 0 1-1.7 1.5A14 14 0 0 1 2.7 4.7 1.5 1.5 0 0 1 4.2 3z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+          <div><div class="c-k">ТЕЛЕФОН</div><div class="c-v"><span class="todo">+7 ___ ___-__-__</span></div></div>
+        </div>
+        <div class="c-row">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="7.5" stroke="currentColor" stroke-width="1.8"/><path d="M10 5.5V10l3 2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+          <div><div class="c-k">РЕЖИМ РАБОТЫ</div><div class="c-v"><span class="todo">[ЗАПОЛНИТЬ график по дням]</span></div></div>
+        </div>
+        <div class="c-row">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><rect x="2" y="4" width="16" height="12" stroke="currentColor" stroke-width="1.8"/><path d="M2 5.5l8 5.5 8-5.5" stroke="currentColor" stroke-width="1.8"/></svg>
+          <div><div class="c-k">ПОЧТА И МЕССЕНДЖЕРЫ</div><div class="c-v"><span class="todo">[ЗАПОЛНИТЬ]</span></div></div>
+        </div>
+      </div>
+      <div class="map"><span>КАРТА — [ЗАПОЛНИТЬ]<br>вставить виджет Яндекс.Карт<br>с адресом сервиса</span></div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ═══════ футер ═══════ -->
+<footer>
+  <div class="wrap">
+    <div class="f-top">
+      <div class="f-c">
+        <a href="#" class="logo">
+          <svg class="logo-m" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+            <rect x="1.5" y="1.5" width="37" height="37" stroke="#FFC400" stroke-width="2.5"/>
+            <path d="M11 28V12l9 11 9-11v16" stroke="#fff" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+          </svg>
+          <span><span class="logo-n">Момент</span><span class="logo-s">автосервис · Псков</span></span>
+        </a>
+        <p class="f-ab">Называем дату до начала работ и держим её. Смета фиксируется, доплат по ходу нет, снятые детали показываем.</p>
+      </div>
+      <div class="f-c">
+        <h4>Разделы</h4>
+        <a href="#svc">Услуги</a>
+        <a href="#calc">Сроки работ</a>
+        <a href="#price">Цены</a>
+        <a href="#how">Как работаем</a>
+        <a href="#faq">Вопросы</a>
+      </div>
+      <div class="f-c">
+        <h4>Связаться</h4>
+        <span class="todo">+7 ___ ___-__-__</span>
+        <span class="todo">Почта — [ЗАПОЛНИТЬ]</span>
+        <span class="todo">Адрес — [ЗАПОЛНИТЬ]</span>
+        <span class="todo">График — [ЗАПОЛНИТЬ]</span>
+      </div>
+    </div>
+    <div class="f-bot">
+      <span>© 2026 МОМЕНТ. Автосервис в Пскове.</span>
+      <span>Цены и сроки на сайте — ориентир, точные фиксируются в заказ-наряде.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  var reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ═══ работы: время в цеху ═══ */
+  var WORKS = [
+    {id:"diag",   name:"Компьютерная диагностика",        hours:0.7},
+    {id:"oil",    name:"Замена масла и фильтра",          hours:0.8},
+    {id:"plugs",  name:"Замена свечей зажигания",         hours:0.7},
+    {id:"pads",   name:"Замена тормозных колодок, ось",   hours:0.9},
+    {id:"discs",  name:"Замена тормозных дисков, ось",    hours:1.2},
+    {id:"struts", name:"Замена стоек амортизаторов, пара",hours:2.2},
+    {id:"silent", name:"Замена сайлентблоков рычага",     hours:1.8},
+    {id:"align",  name:"Развал-схождение на стенде",      hours:1.5},
+    {id:"timing", name:"Замена ремня ГРМ с роликами",     hours:3.5},
+    {id:"clutch", name:"Замена сцепления",                hours:4.5},
+    {id:"rad",    name:"Замена радиатора охлаждения",     hours:2.8},
+    {id:"leak",   name:"Поиск утечки тока",               hours:1.5}
+  ];
+  var SHIFT = 8; // рабочих часов в смене
+
+  function fmtH(h){
+    var s = (Math.round(h * 10) / 10).toString().replace(".", ",");
+    return s + " ч";
+  }
+
+  // сколько смен займут работы: до 8 ч — день в день, дальше по сменам
+  function daysFor(hours){
+    if (hours <= 0) return 0;
+    return Math.ceil(hours / SHIFT);
+  }
+  console.assert(daysFor(0) === 0, "daysFor: пусто -> 0 дней");
+  console.assert(daysFor(0.7) === 1 && daysFor(8) === 1, "daysFor: смена и меньше -> 1 день");
+  console.assert(daysFor(8.1) === 2 && daysFor(16) === 2, "daysFor: вторая смена");
+  console.assert(fmtH(4.5) === "4,5 ч" && fmtH(2) === "2 ч", "fmtH: запятая и целые");
+
+  function dayWord(n){
+    var d10 = n % 10, d100 = n % 100;
+    if (d10 === 1 && d100 !== 11) return n + " день";
+    if (d10 >= 2 && d10 <= 4 && (d100 < 12 || d100 > 14)) return n + " дня";
+    return n + " дней";
+  }
+  console.assert(dayWord(1) === "1 день" && dayWord(2) === "2 дня" && dayWord(5) === "5 дней", "dayWord: склонение");
+
+  var rows = document.getElementById("rows");
+  var priceRows = document.getElementById("priceRows");
+  var picked = {};
+
+  if (rows){
+    var html = "", ph = "";
+    for (var i = 0; i < WORKS.length; i++){
+      var w = WORKS[i];
+      picked[w.id] = false;
+      html += '<div class="wrow" data-id="' + w.id + '">' +
+        '<label><input type="checkbox" value="' + w.id + '">' +
+          '<span class="box"><svg width="12" height="12" viewBox="0 0 14 14" fill="none" aria-hidden="true">' +
+            '<path d="M2.5 7.2l3 3 6-6.4" stroke="#17150F" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>' +
+          '<span class="wrow-n">' + w.name + '</span></label>' +
+        '<span class="wrow-t mono">' + fmtH(w.hours) + '</span>' +
+        '<span class="wrow-p mono todo">[ЗАПОЛНИТЬ]</span>' +
+      '</div>';
+      ph += '<tr><td>' + w.name + '</td><td>' + fmtH(w.hours) + '</td><td class="todo">[ЗАПОЛНИТЬ]</td></tr>';
+    }
+    rows.innerHTML = html;
+    if (priceRows) priceRows.innerHTML = ph;
+
+    var resDay = document.getElementById("resDay"),
+        resSub = document.getElementById("resSub"),
+        resHours = document.getElementById("resHours"),
+        resCount = document.getElementById("resCount");
+
+    function render(){
+      var hours = 0, n = 0;
+      for (var i = 0; i < WORKS.length; i++){
+        if (picked[WORKS[i].id]){ hours += WORKS[i].hours; n++; }
+      }
+      hours = Math.round(hours * 10) / 10;
+      var days = daysFor(hours);
+      resHours.textContent = fmtH(hours);
+      resCount.textContent = n ? n : "—";
+      if (!n){
+        resDay.textContent = "—";
+        resSub.textContent = "Отметьте работы слева";
+      } else if (days <= 1){
+        resDay.textContent = "В ТОТ ЖЕ ДЕНЬ";
+        resSub.textContent = "Успеваем за одну смену — заберёте вечером";
+      } else {
+        resDay.textContent = dayWord(days).toUpperCase();
+        resSub.textContent = "Работ на " + fmtH(hours) + " при смене в " + SHIFT + " часов";
+      }
+    }
+
+    rows.addEventListener("change", function(e){
+      var inp = e.target.closest("input");
+      if (!inp) return;
+      picked[inp.value] = inp.checked;
+      inp.closest(".wrow").classList.toggle("on", inp.checked);
+      render();
+    });
+
+    document.getElementById("calcGo").addEventListener("click", function(){
+      var names = [];
+      for (var i = 0; i < WORKS.length; i++) if (picked[WORKS[i].id]) names.push(WORKS[i].name);
+      if (!names.length) return;
+      var sel = document.getElementById("fWhat");
+      if (sel) sel.selectedIndex = 0;
+    });
+
+    render();
+  }
+
+  /* ═══ меню ═══ */
+  var burger = document.getElementById("burger"), nav = document.getElementById("nav");
+  burger.addEventListener("click", function(){
+    var open = nav.classList.toggle("open");
+    burger.setAttribute("aria-expanded", open ? "true" : "false");
+  });
+  nav.addEventListener("click", function(e){
+    if (e.target.tagName === "A"){ nav.classList.remove("open"); burger.setAttribute("aria-expanded","false"); }
+  });
+
+  /* ═══ форма ═══ */
+  var form = document.getElementById("bookForm");
+  form.addEventListener("submit", function(e){
+    e.preventDefault();
+    var ok = true;
+    [["fName", function(v){ return v.trim().length > 1; }],
+     ["fTel",  function(v){ return v.replace(/\D/g,"").length >= 10; }],
+     ["fWhat", function(v){ return v !== ""; }]].forEach(function(pair){
+      var el = document.getElementById(pair[0]);
+      var good = pair[1](el.value);
+      el.closest(".fld").classList.toggle("bad", !good);
+      if (!good && ok){ el.focus(); ok = false; }
+    });
+    if (!document.getElementById("fOk").checked){
+      if (ok) document.getElementById("fOk").focus();
+      ok = false;
+    }
+    if (!ok) return;
+    document.getElementById("okMsg").classList.add("on");
+    form.querySelector('button[type="submit"]').textContent = "Заявка отправлена";
+  });
+
+  /* ═══ видеофон героя: не грузим на узком экране и при экономии трафика ═══ */
+  var heroMedia = document.getElementById("heroMedia");
+  if (heroMedia){
+    var hv = heroMedia.querySelector("video");
+    var saveData = navigator.connection && navigator.connection.saveData;
+    var wide = innerWidth >= 768;
+    if (hv && wide && !saveData && !reduced){
+      hv.preload = "auto";
+      hv.play().then(function(){ heroMedia.classList.add("playing"); }).catch(function(){});
+      // пауза, когда герой ушёл с экрана — не жжём батарею
+      if ("IntersectionObserver" in window){
+        new IntersectionObserver(function(en){
+          en.forEach(function(x){ x.isIntersecting ? hv.play().catch(function(){}) : hv.pause(); });
+        }, {threshold:.05}).observe(heroMedia);
+      }
+    }
+  }
+
+  /* ═══ видео работы: запуск по кнопке ═══ */
+  var wv = document.getElementById("workVideo"), wvBtn = document.getElementById("wvPlay");
+  if (wv && wvBtn){
+    wvBtn.addEventListener("click", function(){
+      var frame = wv.closest(".wv-frame");
+      if (wv.paused){
+        wv.preload = "auto";
+        wv.play().then(function(){ frame.classList.add("playing"); wvBtn.setAttribute("aria-label","Пауза"); }).catch(function(){});
+      } else {
+        wv.pause(); frame.classList.remove("playing"); wvBtn.setAttribute("aria-label","Включить видео");
+      }
+    });
+  }
+
+  /* ═══ момент затяжки: прогресс по закреплённой секции ═══ */
+  var tqTrack = document.getElementById("tqTrack");
+  var tqSteps = document.querySelectorAll("#tqSteps .tq-step");
+  var tqBar = document.querySelectorAll("#tqBar button");
+  var nmValue = document.getElementById("nmValue");
+  var torque = document.querySelector(".torque");
+  var NM_MAX = 110;
+
+  // прогресс -> момент в Н·м, целое
+  // последние проценты прокрутки добирают норматив — ключ должен щёлкнуть, а не остановиться на 109
+  function nmFor(p){ return Math.round(Math.max(0, Math.min(1, p * 1.06)) * NM_MAX); }
+  console.assert(nmFor(0) === 0, "nmFor: старт 0");
+  console.assert(nmFor(0.5) === 58, "nmFor: середина");
+  console.assert(nmFor(0.95) === 110, "nmFor: добирает норматив до конца трека");
+  console.assert(nmFor(1) === 110 && nmFor(1.4) === 110, "nmFor: потолок 110");
+  console.assert(nmFor(-0.3) === 0, "nmFor: отрицательный зажат");
+
+  if (tqTrack && !reduced){
+    var tqCur = -1, tqTick = false;
+    function tqUpdate(){
+      tqTick = false;
+      var r = tqTrack.getBoundingClientRect();
+      var total = r.height - innerHeight;
+      if (total <= 0) return;
+      var p = Math.max(0, Math.min(1, (-r.top) / total));
+      tqTrack.style.setProperty("--p", p.toFixed(4));
+      var pin = tqTrack.querySelector(".torque-pin");
+      if (pin) pin.style.setProperty("--p", p.toFixed(4));
+      nmValue.textContent = nmFor(p);
+      torque.classList.toggle("done", p >= 0.943);
+
+      var i = Math.min(Math.floor(p * tqSteps.length), tqSteps.length - 1);
+      if (i !== tqCur){
+        tqCur = i;
+        for (var k = 0; k < tqSteps.length; k++) tqSteps[k].classList.toggle("on", k === i);
+        for (var b = 0; b < tqBar.length; b++){
+          tqBar[b].classList.toggle("done", b <= i);
+          tqBar[b].setAttribute("aria-current", b === i ? "true" : "false");
+        }
+      }
+    }
+    addEventListener("scroll", function(){ if (!tqTick){ tqTick = true; requestAnimationFrame(tqUpdate); } }, {passive:true});
+    addEventListener("resize", tqUpdate);
+    tqUpdate();
+
+    document.getElementById("tqBar").addEventListener("click", function(e){
+      var b = e.target.closest("button");
+      if (!b) return;
+      var i = +b.dataset.i, n = tqSteps.length;
+      var r = tqTrack.getBoundingClientRect();
+      var total = r.height - innerHeight;
+      if (total <= 0) return;
+      scrollTo({top: r.top + scrollY + total * ((i + 0.5) / n), behavior: "smooth"});
+    });
+  } else if (tqTrack){
+    for (var s = 0; s < tqSteps.length; s++) tqSteps[s].classList.add("on");
+    nmValue.textContent = NM_MAX;
+  }
+
+  /* ═══ параллакс фонового кадра героя ═══ */
+  var hero = document.querySelector(".hero");
+  if (hero && !reduced){
+    var raf = false;
+    addEventListener("scroll", function(){
+      if (raf) return;
+      raf = true;
+      requestAnimationFrame(function(){
+        raf = false;
+        var y = Math.min(scrollY, innerHeight);
+        hero.style.setProperty("--par", (y * 0.16).toFixed(1) + "px");
+      });
+    }, {passive:true});
+  }
+
+  /* ═══ появление ═══ */
+  if ("IntersectionObserver" in window && !reduced){
+    var io = new IntersectionObserver(function(en){
+      en.forEach(function(x){
+        if (x.isIntersecting){
+          x.target.style.transition = "opacity .55s cubic-bezier(.2,.6,.35,1), transform .55s cubic-bezier(.2,.6,.35,1)";
+          x.target.style.opacity = "1";
+          x.target.style.transform = "none";
+          io.unobserve(x.target);
+        }
+      });
+    }, {rootMargin:"0px 0px -8% 0px", threshold:.05});
+    var rs = document.querySelectorAll(".rise");
+    for (var k = 0; k < rs.length; k++){
+      rs[k].style.transform = "translateY(22px)";
+      rs[k].style.transitionDelay = (Math.min(k % 4, 3) * 70) + "ms";
+      io.observe(rs[k]);
+    }
+  } else {
+    var all = document.querySelectorAll(".rise");
+    for (var m = 0; m < all.length; m++) all[m].style.opacity = "1";
+  }
+})();
+</script>
+</body>
+</html>
