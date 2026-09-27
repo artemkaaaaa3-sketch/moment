@@ -409,6 +409,11 @@ footer{border-top:1px solid var(--line);padding:var(--s5) 0 var(--s3)}
 }
 @media (prefers-reduced-motion:reduce){ html{scroll-behavior:auto} .rise{opacity:1} }
 @media print{.top{display:none}}
+
+/* цели под палец: в подвале ссылки были высотой 20 px, палец промахивался */
+@media(max-width:760px){
+  footer a, .ftr a, .foot a{display:inline-flex;align-items:center;min-height:44px}
+}
 </style>
 <noscript><style>.rise{opacity:1}</style></noscript>
 </head>
@@ -1095,6 +1100,9 @@ footer{border-top:1px solid var(--line);padding:var(--s5) 0 var(--s3)}
   burger.addEventListener("click", function(){
     var open = nav.classList.toggle("open");
     burger.setAttribute("aria-expanded", open ? "true" : "false");
+    /* с клавиатуры фокус уходил мимо меню на кнопку записи */
+    if (open){ var first = nav.querySelector("a"); if (first) first.focus({ preventScroll: true }); }
+    else burger.focus({ preventScroll: true });
   });
   nav.addEventListener("click", function(e){
     if (e.target.tagName === "A"){ nav.classList.remove("open"); burger.setAttribute("aria-expanded","false"); }
